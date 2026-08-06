@@ -1,6 +1,6 @@
 # E03_P8-Sistema-de-riego-inteligente-por-zonas
+##Proyecto de automatización de riego utilizando ESP32 y sensores.
 <img width="1920" height="1048" alt="IoT-e1736873173433" src="https://github.com/user-attachments/assets/297ca89b-2a66-44c3-b533-7e006c271a91" />
-Proyecto de automatización de riego utilizando ESP32 y sensores.
 
 ## Objetivo
 Crear un sistema capaz de controlar una bomba de agua automáticamente
