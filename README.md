@@ -12,7 +12,7 @@ según la humedad del suelo.
 - Micro bomba de agua 
   
 ## Software
-- Arduino IDE / PlatformIO
+- Arduino IDE 
 
 ## Funcionamiento
 El ESP32 lee los sensores y activa la bomba cuando la humedad baja
