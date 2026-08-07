@@ -2,16 +2,15 @@
 <img width="1920" height="1048" alt="IoT-e1736873173433" src="https://github.com/user-attachments/assets/297ca89b-2a66-44c3-b533-7e006c271a91" />
 
 ## Objetivo
-Crear un sistema capaz de controlar una bomba de agua automáticamente
-según la humedad del suelo.
+Diseñar un sistema de IoT de riego automático basado en la humedad del suelo por zonas.
+
 ## Integrantes
 - David Morales
 - Alex Camacaro
 - Sofia Aedo
 - Mauricio Lobo
 - Xavier Lopez
-
-
+- 
 ## Hardware
 - Microcontrolador ESP32
 - 2 Sensor de humedad de suelo HD-38
@@ -26,7 +25,3 @@ según la humedad del suelo.
 - Grafana
 - Python + Pandas
 - Node-RED
-
-## Funcionamiento
-El ESP32 lee los sensores y activa la bomba cuando la humedad baja
-del nivel configurado.
