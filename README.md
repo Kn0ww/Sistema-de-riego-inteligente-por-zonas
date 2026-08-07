@@ -14,12 +14,18 @@ según la humedad del suelo.
 
 ## Hardware
 - Microcontrolador ESP32
-- Sensor de humedad de suelo MCI07637
-- Relé de 4 canales MCI02798
-- Micro bomba de agua 
+- 2 Sensor de humedad de suelo HD-38
+- Relé de 4 canales HW-316
+- Mini bomba de agua R385 DC 3–6V
   
 ## Software
-- Arduino IDE 
+- Arduino IDE
+- Mosquitto
+- Telegraf
+- InfluxDB
+- Grafana
+- Python + Pandas
+- Node-RED
 
 ## Funcionamiento
 El ESP32 lee los sensores y activa la bomba cuando la humedad baja
