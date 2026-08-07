@@ -10,7 +10,7 @@ Diseñar un sistema de IoT de riego automático basado en la humedad del suelo p
 - Sofia Aedo
 - Mauricio Lobo
 - Xavier Lopez
-- 
+  
 ## Hardware
 - Microcontrolador ESP32
 - 2 Sensor de humedad de suelo HD-38
