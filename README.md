@@ -25,3 +25,8 @@ Diseñar un sistema de IoT de riego automático basado en la humedad del suelo p
 - Grafana
 - Python + Pandas
 - Node-RED
+
+## Calibración
+- m: 0.94883
+- b: -1.955 °C
+- Tolerancia declarada: ±0.5 °C.
