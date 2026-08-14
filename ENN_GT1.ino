@@ -20,10 +20,10 @@
 // 1. Configuracion del equipo
 // ---------------------------------------------------------------------------
 const uint8_t  PIN_SENSOR   = 34;      // ADC1 canal 6. No usar GPIO 0-27 (ADC2).
-const uint32_t PERIODO_MS   = 1000;    // [ms] Periodo de muestreo del taller.
+const uint32_t PERIODO_MS   = 60000;    // [ms] Periodo de muestreo del taller.
                                        // El periodo del nodo real es el que
                                        // declararon en su plan de datos (ED).
-const uint8_t  N_FILTRO     = 5;       // Ventana del filtro. Justifiquenla.
+const uint8_t  N_FILTRO     = 5;       // Ventana del filtro. 
 const bool     USAR_MEDIANA = false;   // false: media movil | true: mediana
 
 // Constantes de conversion cuentas -> magnitud fisica.
@@ -36,7 +36,6 @@ const float OFFSET_SENSOR = 2.10f;      // [grados C] a 0 V, segun hoja de datos
 // ---------------------------------------------------------------------------
 // ERROR SISTEMATICO SIMULADO
 // ---------------------------------------------------------------------------
-//
 // Wokwi utiliza componentes practicamente ideales.
 // Para reproducir el comportamiento de un sensor fisico introducimos
 // deliberadamente un error sistematico.
@@ -44,13 +43,6 @@ const float OFFSET_SENSOR = 2.10f;      // [grados C] a 0 V, segun hoja de datos
 // El "sensor imperfecto" simulado cumple:
 //
 //      M = GANANCIA_ERROR_SIM * valor_nominal + OFFSET_ERROR_SIM
-//
-// Ejemplo:
-//
-//      valor nominal = 20 grados C
-//
-//      M = 1.05 * 20 + 2
-//      M = 23 grados C
 //
 // Por tanto, el sensor simulado medira sistematicamente diferente
 // de la referencia.
@@ -210,6 +202,7 @@ void loop() {
         Valor calibrado: 23.87°C
         Error = |24.00° C - 23.87° C|
         Error = 0.13° C
+        
   TOLERANCIA
 
      Declarada: ± 0.5° C
@@ -217,5 +210,4 @@ void loop() {
      Justificacion: En el tercer punto de 24.0° C, se obtuve un valor calibrado
      de 23.87° C, por lo que el error fue de 0.13° C.
      Como 0.13° C ≤ 0.5° C, la calibracion cumple con la tolerancia que se propuso.
-
    ========================================================================== */
