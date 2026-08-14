@@ -30,3 +30,4 @@ Diseñar un sistema de IoT de riego automático basado en la humedad del suelo p
 - m: 0.94883
 - b: -1.955 °C
 - Tolerancia declarada: ±0.5 °C.
+- N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego. 
