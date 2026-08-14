@@ -184,8 +184,33 @@ void loop() {
   // Aqui NO va delay(). El resto del lazo queda libre para las semanas
   // siguientes: maquina de estados, lectura de botones, publicacion MQTT.
 }
-
+// ---------------------------------------------------------------------------
+// 5. Diferencias
+// ---------------------------------------------------------------------------
 /* ==========================================================================
+   Valor Calibrado :
+   Esta lectura cruda salta bastante por que Siempre hay un poco de ruido eléctrico o 
+   interferencias en el ambiente que hacen que los números suban y bajen de 
+   golpe. Si graficamos esto, se ve como una línea temblorosa o con 
+   picos raros en cada rato.
+
+   Valor Filtrado (Usando la media móvil ):
+   Aquí la señal se vuelve mucho más estable y normal. 
+   Como estamos sacando un promedio constante de las últimas 5 lecturas, logramos suavizar los saltos repentinos de la señal original. 
+   En si el filtro limpia ese pequeño ruido eléctrico y nos deja ver cómo se comporta realmente la temperatura de forma mucho más clara 
+   sin anormalidades.
+
+   
+// ---------------------------------------------------------------------------
+// 6. Retardo
+// ---------------------------------------------------------------------------
+/* ==========================================================================
+Elegimos el periodo de 60.000ms(1 minuto) por que la humedad de la tierra es un
+proceso muy lento que no cambia a lo mas tardar minutos u horas.
+Ademas si el sensor midiera cada 10 segundos por ejemplo ,estariamos saturando el sistema
+gastando memoria,electricidad para leer el mismo dato una y otra vez.
+
+   
   CALIBRACION DE DOS PUNTOS
 
        Referencia 1 = 10.0° C     Lectura obtenida = 12.60° C
