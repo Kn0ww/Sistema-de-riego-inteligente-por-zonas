@@ -15,7 +15,9 @@ Diseñar un sistema de IoT de riego automático basado en la humedad del suelo p
 - Microcontrolador ESP32
 - 2 Sensor de humedad de suelo HD-38
 - Relé de 4 canales HW-316
-- Mini bomba de agua R385 DC 3–6V
+- Mini bomba de agua R385 DC 5V
+- Pantalla LCD 16×2 GDM1602K
+- Servomotor SG90 
   
 ## Software
 - Arduino IDE
