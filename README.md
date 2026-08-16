@@ -2,7 +2,7 @@
 <img width="1920" height="1048" alt="IoT-e1736873173433" src="https://github.com/user-attachments/assets/297ca89b-2a66-44c3-b533-7e006c271a91" />
 
 ## Objetivo
-Diseñar un sistema de IoT de riego automático basado en la humedad del suelo por zonas.
+Diseñar e implementar un sistema de riego automático basado en IoT, capaz de monitorear la humedad del suelo y controlar el riego de manera independiente según las necesidades de cada zona.
 ## Integrantes
 - David Morales
 - Alex Camacaro
