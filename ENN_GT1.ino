@@ -184,55 +184,46 @@ void loop() {
   // Aqui NO va delay(). El resto del lazo queda libre para las semanas
   // siguientes: maquina de estados, lectura de botones, publicacion MQTT.
 }
-// ---------------------------------------------------------------------------
-// 5. Diferencias
-// ---------------------------------------------------------------------------
-/* ==========================================================================
-   Valor Calibrado :
-   Esta lectura cruda salta bastante por que Siempre hay un poco de ruido eléctrico o 
-   interferencias en el ambiente que hacen que los números suban y bajen de 
-   golpe. Si graficamos esto, se ve como una línea temblorosa o con 
-   picos raros en cada rato.
-
-   Valor Filtrado (Usando la media móvil ):
-   Aquí la señal se vuelve mucho más estable y normal. 
-   Como estamos sacando un promedio constante de las últimas 5 lecturas, logramos suavizar los saltos repentinos de la señal original. 
-   En si el filtro limpia ese pequeño ruido eléctrico y nos deja ver cómo se comporta realmente la temperatura de forma mucho más clara 
-   sin anormalidades.
-
-   
-// ---------------------------------------------------------------------------
-// 6. Retardo
-// ---------------------------------------------------------------------------
-/* ==========================================================================
-Elegimos el periodo de 60.000ms(1 minuto) por que la humedad de la tierra es un
-proceso muy lento que no cambia a lo mas tardar minutos u horas.
-Ademas si el sensor midiera cada 10 segundos por ejemplo ,estariamos saturando el sistema
-gastando memoria,electricidad para leer el mismo dato una y otra vez.
-
-   
-  CALIBRACION DE DOS PUNTOS
+/* ==========================================================================   
+   CALIBRACION DE DOS PUNTOS
 
        Referencia 1 = 10.0° C     Lectura obtenida = 12.60° C
        Referencia 2 = 38.0° C     Lectura obtenida = 42.11° C
 
    Entonces:
-
        m = (R2 - R1) / (M2 - M1) = 28.0°C/29.51° C = 0.94883 
        b =  R1 - m * M1 = 10.0° C - 0.94883 * 12.60° C = -1.955° C
    
    Verificación 3er punto:
-
-       Referencia 3 = 24.0° C
-        Valor calibrado: 23.87°C
-        Error = |24.00° C - 23.87° C|
-        Error = 0.13° C
+   
+      Referencia 3 = 24.0° C
+      Valor calibrado: 23.87°C
+      Error = |24.00° C - 23.87° C|
+      Error = 0.13° C
         
-  TOLERANCIA
+   TOLERANCIA
 
-     Declarada: ± 0.5° C
-     
-     Justificacion: En el tercer punto de 24.0° C, se obtuve un valor calibrado
-     de 23.87° C, por lo que el error fue de 0.13° C.
-     Como 0.13° C ≤ 0.5° C, la calibracion cumple con la tolerancia que se propuso.
+   Declarada: ± 0.5° C  
+   Justificacion: En el tercer punto de 24.0° C, se obtuvo un valor calibrado
+   de 23.87° C, por lo que el error fue de 0.13° C.
+   Como 0.13° C ≤ 0.5° C, la calibracion cumple con la tolerancia que se propuso.
+   ========================================================================== */
+/* ==========================================================================
+             C_calibrado    filtrado_C
+                 38.07        38.07
+                 38.00        38.03
+                 35.56        37.21
+                 35.11        35.11
+                 35.50        37.13
+/* ==========================================================================
+   5. Diferencias
+   El valor antes del filtro varia en 38.00, 35.50, 35.56, mientras que el filtrado 
+   no vario mucho porque la media móvil de N = 5 suaviza el ruido de las mediciones.
+   ========================================================================== */
+/* ==========================================================================
+   6. Retardo
+   Elegimos el periodo de 60.000ms(1 minuto) por que la humedad de la tierra es un
+   proceso muy lento que no cambia a lo mas tardar minutos u horas.
+   Ademas si el sensor midiera cada 10 segundos por ejemplo ,estariamos saturando el sistema
+   gastando memoria, electricidad para leer el mismo dato una y otra vez.
    ========================================================================== */
