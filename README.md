@@ -16,7 +16,8 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - Relé de 4 canales HW-316
 - Mini bomba de agua R385 DC 5V
 - Pantalla LCD 16×2 GDM1602K
-- Servomotor SG90 
+- Servomotor SG90
+- 2 pilas 18650
   
 ## Software
 - Arduino IDE
