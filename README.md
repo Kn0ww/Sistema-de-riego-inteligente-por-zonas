@@ -3,7 +3,6 @@
 
 ## Objetivo
 Diseñar un sistema de IoT de riego automático basado en la humedad del suelo por zonas.
-
 ## Integrantes
 - David Morales
 - Alex Camacaro
