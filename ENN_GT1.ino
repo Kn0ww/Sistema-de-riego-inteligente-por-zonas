@@ -249,9 +249,6 @@ void loop() {
    Ademas para respetar las restricciones de alimentacion implementaremos una mauina de estados en nuestro codigo
    ue hara que active de manera secuencial los actuadores, para asi prevenir caida de tension de riel y que se reinicie
    el sistema
- 
-  
- 
    ========================================================================== */
 
    
