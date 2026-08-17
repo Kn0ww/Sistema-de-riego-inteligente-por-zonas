@@ -184,7 +184,8 @@ void loop() {
   // Aqui NO va delay(). El resto del lazo queda libre para las semanas
   // siguientes: maquina de estados, lectura de botones, publicacion MQTT.
 }
-/* ==========================================================================   
+/* ========================================================================== 
+   ITEM 4)
    CALIBRACION DE DOS PUNTOS
 
        Referencia 1 = 10.0° C     Lectura obtenida = 12.60° C
@@ -209,6 +210,7 @@ void loop() {
    Como 0.13° C ≤ 0.5° C, la calibracion cumple con la tolerancia que se propuso.
    ========================================================================== */
 /* ==========================================================================
+   ITEM 5)
              C_calibrado    filtrado_C
                  38.07        38.07
                  38.00        38.03
@@ -216,14 +218,14 @@ void loop() {
                  35.11        35.11
                  35.50        37.13
 /* ==========================================================================
-   5. Diferencias
+   Diferencias
    
    El valor antes del filtro varia en 38.00, 35.50, 35.56, mientras que el filtrado 
    no vario mucho porque la media móvil de N = 5 suaviza el ruido de las mediciones.
    
    ========================================================================== */
 /* ==========================================================================
-   6. Retardo
+   Retardo
    
    Elegimos el periodo de 60.000ms(1 minuto) por que la humedad de la tierra es un
    proceso muy lento que no cambia a lo mas tardar minutos u horas.
