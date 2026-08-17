@@ -217,13 +217,35 @@ void loop() {
                  35.50        37.13
 /* ==========================================================================
    5. Diferencias
+   
    El valor antes del filtro varia en 38.00, 35.50, 35.56, mientras que el filtrado 
    no vario mucho porque la media móvil de N = 5 suaviza el ruido de las mediciones.
+   
    ========================================================================== */
 /* ==========================================================================
    6. Retardo
+   
    Elegimos el periodo de 60.000ms(1 minuto) por que la humedad de la tierra es un
    proceso muy lento que no cambia a lo mas tardar minutos u horas.
    Ademas si el sensor midiera cada 10 segundos por ejemplo ,estariamos saturando el sistema
    gastando memoria, electricidad para leer el mismo dato una y otra vez.
+   
    ========================================================================== */
+
+
+/* ==========================================================================
+   8. Defensa
+   Dado que el simulador ded Wokwi asume todo perfecto y componentes ideales, obviamente carece
+   de errores de fabricacion(motivo por el cual esta inyectado el error por software), la verificacion
+   en vida real consiste en someter los sensores a medir en la tierra,Esto nos poermitira calcular de manera
+   exacta la ganancia y el desplazamiento m y b, de cada sensor fisico por separado corrigiendo su variabilidad.
+
+   Ademas para respetar las restricciones de alimentacion implementaremos una mauina de estados en nuestro codigo
+   ue hara que active de manera secuencial los actuadores, para asi prevenir caida de tension de riel y que se reinicie
+   el sistema
+ 
+  
+ 
+   ========================================================================== */
+
+   
