@@ -233,7 +233,11 @@ void loop() {
    gastando memoria, electricidad para leer el mismo dato una y otra vez.
    
    ========================================================================== */
+/* ==========================================================================
 
+//La variabilidad entre unidades obliga a registrar tres pares $(m, b)$ distintos.
+//Tres electroválvulas solenoides: no accionar simultáneamente. Riel de 12 V independiente 
+  y secuenciación por zona en la máquina de estados
 
 /* ==========================================================================
    ITEM 8) Defensa
