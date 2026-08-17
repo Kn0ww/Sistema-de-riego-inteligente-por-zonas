@@ -185,8 +185,7 @@ void loop() {
   // siguientes: maquina de estados, lectura de botones, publicacion MQTT.
 }
 /* ========================================================================== 
-   ITEM 4)
-   CALIBRACION DE DOS PUNTOS
+   ITEM 4) CALIBRACION DE DOS PUNTOS
 
        Referencia 1 = 10.0° C     Lectura obtenida = 12.60° C
        Referencia 2 = 38.0° C     Lectura obtenida = 42.11° C
@@ -210,7 +209,8 @@ void loop() {
    Como 0.13° C ≤ 0.5° C, la calibracion cumple con la tolerancia que se propuso.
    ========================================================================== */
 /* ==========================================================================
-   ITEM 5)
+   ITEM 5) Ruido y filtrado
+   
              C_calibrado    filtrado_C
                  38.07        38.07
                  38.00        38.03
@@ -236,7 +236,7 @@ void loop() {
 
 
 /* ==========================================================================
-   8. Defensa
+   ITEM 8) Defensa
    Dado que el simulador ded Wokwi asume todo perfecto y componentes ideales, obviamente carece
    de errores de fabricacion(motivo por el cual esta inyectado el error por software), la verificacion
    en vida real consiste en someter los sensores a medir en la tierra,Esto nos poermitira calcular de manera
