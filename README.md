@@ -38,6 +38,5 @@ Sensor: <HD-38> | Familia: A | Referencia: (cual y quien lo valido)
 | m (ganancia)     | 0.94883          | x           |            |
 | b (offset)       | -1.955           | x           |            |
 | Tercer punto     | dentro de tol.   | x           |            |
-------------------------------------------------------------------
 Tolerancia declarada: ±0.5 °C
 Condiciones: temperatura , superficie , sustrato u otra según familia.
