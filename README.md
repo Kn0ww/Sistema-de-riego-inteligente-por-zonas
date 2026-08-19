@@ -28,8 +28,16 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - Python + Pandas
 - Node-RED
 
-## Calibración
-- m: 0.94883
-- b: -1.955 °C
-- Tolerancia declarada: ±0.5 °C.
+## Ventana del filtro
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego. 
+
+## Verificación física del sensor (Semana 4, ítem 1 GT2)
+Sensor: <HD-38> | Familia: A | Referencia: (cual y quien lo valido)
+| Parámetro        | Simulación (GT1) | Físico (S4) | Desviación |
+|------------------|------------------|-------------|------------|
+| m (ganancia)     | 0.94883          | x           |            |
+| b (offset)       | -1.955           | x           |            |
+| Tercer punto     | dentro de tol.   | x           |            |
+------------------------------------------------------------------
+Tolerancia declarada: ±0.5 °C
+Condiciones: temperatura , superficie , sustrato u otra según familia.
