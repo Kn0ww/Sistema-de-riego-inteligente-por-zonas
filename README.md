@@ -31,23 +31,24 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 ## Ventana del filtro
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego.
 
-## Verificación fisica del sensor (Semana 4, item 1 GT2)
+## Verificación fisica del sensor
 
-- Sensor: humedad de suelo capacitivo (2 unidades montadas) | Familia: A (analogico por ADC)
+- Sensor: humedad de suelo capacitivo | Familia: A 
 - Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
-- Referencia validada por: <docente de la seccion>
+- Referencia validada por: docente de la seccion
 
-### Condiciones de la medicion (se fijan ANTES de medir)
-| Condicion                          | Valor declarado |
+
+### Condiciones de la medición
+| Condición                          | Valor declarado |
 |------------------------------------|-----------------|
-| Tension de alimentacion medida     | <V> (nominal 3,3 V) |
-| Canales empleados                  | Z1: GPIO 32, Z2: GPIO 33 (ADC1) |
-| Atenuacion del convertidor         | 11 dB |
-| Divisor a la entrada               | NO se emplea (justificacion en la hoja de conexion) |
-| Sustrato de cada zona              | Z1: <cual>  Z2: <cual> |
-| Profundidad de insercion           | hasta <cm>, misma en ambas zonas |
-| Temperatura ambiente               | <°C> |
-| N de la media movil                | 5 |
+| Tensión de alimentación medida     | nominal 3,3 V |
+| Canales empleados                  | Z1: GPIO 32, Z2: GPIO 33 |
+| Atenuación del convertidor         | 11 dB |
+| Divisor a la entrada               | NO se emplea (justificacion en la hoja de conexion,), porque el sensor se alimenta de 3,3 V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuración |
+| Sustrato de cada zona              | Z1: agua  Z2: agua |
+| Profundidad de inserción           | 8 cm |
+| Temperatura ambiente               | 20° |
+| N de la media móvil                | 5 |
 
 
 
