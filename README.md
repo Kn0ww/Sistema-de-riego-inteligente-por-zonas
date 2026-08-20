@@ -49,6 +49,11 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 | Temperatura ambiente               | La temperatura ambiente es de 20°C |
 | N de la media móvil                | 5 |
 
+### Tolerancia declarada
+| Criterio                                          | Tolerancia aceptada |
+|---------------------------------------------------|---------------------|
+| Dispersión aceptada en condición estable, por zona | ± 2%|
+| Separación mínima exigida entre aire y agua        | 300 mV |
 
 
 ## Verificación física del sensor (Semana 4, ítem 1 GT2)
