@@ -55,6 +55,23 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 | Dispersión aceptada en condición estable, por zona | ± 2%|
 | Separación mínima exigida entre aire y agua        | 500 mV |
 
+### Calibracion de dos puntos
+| Zona | Cuentas en aire | Cuentas en agua | Separacion | m | b |
+|------|-----------------|-----------------|------------|---|---|
+| 1    | <>              | <>              | <>         | <>| <>|
+| 2    | <>              | <>              | <>         | <>| <>|
+
+La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
+
+### Verificacion en el tercer punto (tierra humeda)
+| Zona | Cuentas | Porcentaje | Estable y repetible |
+|------|---------|------------|---------------------|
+| 1    | <>      | <>         | si / no             |
+| 2    | <>      | <>         | si / no             |
+
+No existe patron de humedad en el laboratorio: la verificacion es de COHERENCIA
+(0 % al aire, 100 % en agua, valor intermedio estable en tierra humeda), no de
+exactitud contra un instrumento de referencia.
 
 ## Verificación física del sensor (Semana 4, ítem 1 GT2)
 Sensor: Humedad HD-38 | Familia: A | Referencia: docente de la seccion
