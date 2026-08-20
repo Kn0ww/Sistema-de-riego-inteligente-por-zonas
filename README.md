@@ -32,7 +32,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego. 
 
 ## Verificación física del sensor (Semana 4, ítem 1 GT2)
-Sensor: Humedad HD-38 | Familia: A | Referencia: (cual y quien lo valido)
+Sensor: Humedad HD-38 | Familia: A | Referencia: docente de la seccion
 | Parámetro        | Simulación (GT1) | Físico (S4) | Desviación |
 |------------------|------------------|-------------|------------|
 | m (ganancia)     | 0.94883          | x           |            |
