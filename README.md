@@ -37,7 +37,6 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
 - Referencia validada por: docente de la seccion
 
-
 ### Condiciones de la medición
 | Condición                          | Valor declarado |
 |------------------------------------|-----------------|
@@ -46,8 +45,8 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 | Atenuación del convertidor         | 11 dB |
 | Divisor a la entrada               | NO se emplea (justificacion en la hoja de conexion,), porque el sensor se alimenta de 3,3 V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuración |
 | Sustrato de cada zona              | Z1: agua  Z2: agua |
-| Profundidad de inserción           | 8 cm |
-| Temperatura ambiente               | 20°C |
+| Profundidad de inserción           | La profundidad fue 8 cm |
+| Temperatura ambiente               | La temperatura ambiente es de 20°C |
 | N de la media móvil                | 5 |
 
 
