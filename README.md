@@ -55,10 +55,10 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 | Dispersión aceptada en condición estable, por zona | ± 2%|
 | Separación mínima exigida entre aire y agua        | 500 mV |
 
-### Calibracion de dos puntos
-| Zona | Cuentas en aire | Cuentas en agua | Separacion | m | b |
-|------|-----------------|-----------------|------------|---|---|
-| 1    | <>              | <>              | <>         | <>| <>|
+### Calibración de dos puntos
+| Zona | Cuentas en aire | Cuentas en agua | Separación |    m      |     b    |
+|------|-----------------|-----------------|------------|-----------|----------|
+| 1    | 4095            | 878.8           | 3237.2     | −0.030891 | 126.4966 |
 | 2    | <>              | <>              | <>         | <>| <>|
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
