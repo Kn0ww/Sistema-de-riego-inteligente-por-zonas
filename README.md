@@ -58,7 +58,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 ### Calibración de dos puntos
 | Zona | Cuentas en aire | Cuentas en agua | Separación |    m      |     b    |
 |------|-----------------|-----------------|------------|-----------|----------|
-| 1    | 4095            | 878.8           | 3237.2     | −0.030891 | 126.4966 |
+| 1    | 4095            | 1108.3          | 2986.7     | -0.033482 | 137.1088 |
 | 2    | <>              | <>              | <>         | <>| <>|
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
