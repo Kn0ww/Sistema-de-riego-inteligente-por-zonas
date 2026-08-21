@@ -55,7 +55,7 @@ Referencia validada por: <docente de la seccion>
 | Divisor a la entrada               | NO se emplea (Porque el sensor se alimenta de 3,3V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuracion) |
 | Lectura en aire dentro de la zona util | si / no (si toco el tope, NO se calibro) |
 | Tiempo de estabilizacion en cada punto | <s> antes de promediar |
-| Sustrato de cada zona              | Z1: <Agua>  Z2: <Agua> |
+| Sustrato de cada zona              | Z1: Agua  Z2: Agua |
 | Profundidad de insercion           | hasta <8cm>, MARCADA con cinta o plumon |
 | Temperatura ambiente               | <20°C> |
 | N de la media movil                | 5 |
