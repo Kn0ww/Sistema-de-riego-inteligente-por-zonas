@@ -31,48 +31,6 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 ## Ventana del filtro
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego.
 
-## Verificación fisica del sensor
-
-- Sensor: humedad de suelo capacitivo | Familia: A 
-- Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
-- Referencia validada por: docente de la seccion
-
-### Condiciones de la medición
-| Condición                          | Valor declarado |
-|------------------------------------|-----------------|
-| Tensión de alimentación medida     | nominal 3,3 V |
-| Canales empleados                  | Z1: GPIO 32,  Z2: GPIO 33 |
-| Atenuación del convertidor         | 11 dB |
-| Divisor a la entrada               | NO se emplea (justificacion en la hoja de conexion,), porque el sensor se alimenta de 3,3 V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuración |
-| Sustrato de cada zona              | Z1: agua  Z2: agua |
-| Profundidad de inserción           | La profundidad fue 8 cm |
-| Temperatura ambiente               | La temperatura ambiente es de 20°C |
-| N de la media móvil                | 5 |
-
-### Tolerancia declarada
-| Criterio                                          | Tolerancia aceptada |
-|---------------------------------------------------|---------------------|
-| Dispersión aceptada en condición estable, por zona | ± 2%|
-| Separación mínima exigida entre aire y agua        | 500 mV |
-
-### Calibración de dos puntos
-| Zona | Cuentas en aire | Cuentas en agua | Separación |    m      |     b    |
-|------|-----------------|-----------------|------------|-----------|----------|
-| 1    | 4095            | 1108.3          | 2986.7     | -0.033482 | 137.1088 |
-| 2    | <>              | <>              | <>         | <>| <>|
-
-La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
-
-### Verificacion en el tercer punto (tierra humeda)
-| Zona | Cuentas | Porcentaje | Estable y repetible |
-|------|---------|------------|---------------------|
-| 1    | <>      | <>         | si / no             |
-| 2    | <>      | <>         | si / no             |
-
-No existe patron de humedad en el laboratorio: la verificacion es de COHERENCIA
-(0 % al aire, 100 % en agua, valor intermedio estable en tierra humeda), no de
-exactitud contra un instrumento de referencia.
-
 ## Verificación física del sensor (Semana 4, ítem 1 GT2)
 Sensor: Humedad HD-38 | Familia: A | Referencia: docente de la seccion
 | Parámetro        | Simulación (GT1) | Físico (S4) | Desviación |
