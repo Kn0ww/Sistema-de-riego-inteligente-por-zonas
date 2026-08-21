@@ -49,28 +49,28 @@ Referencia validada por: <docente de la seccion>
 ### Condiciones de la medicion (se fijan ANTES de medir)
 | Condicion                          | Valor declarado |
 |------------------------------------|-----------------|
-| Tension de alimentacion MEDIDA     | <V> (obligatorio 3,3 V, verificado con multimetro) |
+| Tension de alimentacion MEDIDA     | <3,3V> (verificado con multimetro) |
 | Canales empleados                  | Z1: GPIO 32, Z2: GPIO 33 (ADC1) |
 | Atenuacion del convertidor         | 11 dB, lectura en mV calibrados de fabrica |
-| Divisor a la entrada               | NO se emplea (justificacion en la hoja de conexion) |
+| Divisor a la entrada               | NO se emplea (Porque el sensor se alimenta de 3,3V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuracion) |
 | Lectura en aire dentro de la zona util | si / no (si toco el tope, NO se calibro) |
 | Tiempo de estabilizacion en cada punto | <s> antes de promediar |
-| Sustrato de cada zona              | Z1: <cual>  Z2: <cual> |
-| Profundidad de insercion           | hasta <cm>, MARCADA con cinta o plumon |
-| Temperatura ambiente               | <°C> |
+| Sustrato de cada zona              | Z1: <Agua>  Z2: <Agua> |
+| Profundidad de insercion           | hasta <8cm>, MARCADA con cinta o plumon |
+| Temperatura ambiente               | <20°C> |
 | N de la media movil                | 5 |
 
 ### Tolerancia declarada ANTES de verificar
 | Criterio                                          | Tolerancia aceptada |
 |---------------------------------------------------|---------------------|
-| Dispersion aceptada en condicion estable, por zona | <+/- puntos porcentuales> |
-| Separacion minima exigida entre aire y agua        | <mV> |
+| Dispersion aceptada en condicion estable, por zona | <± 2%> |
+| Separacion minima exigida entre aire y agua        | <500mV> |
 | Reproducibilidad del punto de agua entre repeticiones | <+/- mV> |
 
 ### Calibracion de dos puntos, una fila por zona (en milivolts)
 | Zona | mV en aire | mV en agua | Separacion (mV) | m (%/mV) | b (%) |
 |------|------------|------------|-----------------|----------|-------|
-| 1    | <>         | <>         | <>              | <>       | <>    |
+| 1    | <4095>     | <1108.3>   | <2986.7>        | <-0.033482>| <137.1088>|
 | 2    | <>         | <>         | <>              | <>       | <>    |
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
