@@ -1,10 +1,9 @@
 // ============================================================
-// Fundamentos de IoT 2026-2 · Semana 4 (17 al 21 de agosto de 2026)
-// P8 · Sistema de riego inteligente por zonas · E03 · LAB 1
-// Sensor: humedad de suelo capacitivo (x2) · Familia A      v1.1
-// GT2 item 1 — Verificacion fisica del sensor
+// Fundamentos de IoT 2026 · Semana 4 
+// P8 · Sistema de riego inteligente por zonas · E03
+// Sensor: humedad de suelo capacitivo · Familia A      
 //
-// PASO 3 — Conversion con el par de cada zona y filtrado
+// Conversion con el par de cada zona y filtrado
 // Objetivo unico: transformar milivolts en porcentaje de humedad usando
 // el par (m, b) propio de cada zona, y aplicar la media movil de la
 // Semana 3. Las dos zonas se leen en el mismo lazo, sin bloquearse.
@@ -16,9 +15,9 @@ const int PIN_ZONA[N_ZONAS] = {32, 33};
 const unsigned long PERIODO_MS = 1000;
 const int N_FILTRO = 5;                   // media movil, N impar
 
-// --- Pares (m, b) obtenidos en el paso 2, en % por milivolt. ---
-const float M_ZONA[N_ZONAS] = {-0.0454236, -0.0380531};   // <-- REEMPLAZAR
-const float B_ZONA[N_ZONAS] = {141.9032, 118.9187};      // <-- REEMPLAZAR
+// --- Pares (m, b) obtenidos en GT2_FMS_calibracion_sensor, en % por milivolt.
+const float M_ZONA[N_ZONAS] = {-0.0454236, -0.0380531}; 
+const float B_ZONA[N_ZONAS] = {141.9032, 118.9187};   
 
 const int MV_MAXIMO_UTIL = 2450;
 const int MV_MINIMO_UTIL = 150;
