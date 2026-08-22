@@ -3,6 +3,7 @@
 // P8 · Sistema de riego inteligente por zonas · E03 
 // Sensor: humedad de suelo capacitivo · Familia A 
 //============================================================
+
 // ---------- 1. Configuracion ----------
 
 const int ZONA = 1;                       // <-- 1 o 2
