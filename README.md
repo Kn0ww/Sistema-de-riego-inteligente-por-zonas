@@ -32,12 +32,12 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego.
 
 ## Verificación física del sensor
-| Parámetro        | Simulación (GT1) | Físico (S4) | Desviación |
-|------------------|------------------|-------------|------------|
-| m (ganancia)     | 0.94883          | x           |            |
-| b (offset)       | -1.955           | x           |            |
-| Tercer punto     | dentro de tol.   | x           |            |
-------------------------------------------------------------------
+| Parámetro        | Simulación (GT1) | 
+|------------------|------------------|
+| m (ganancia)     | 0.94883          |
+| b (offset)       | -1.955           |
+| Tercer punto     | dentro de tol.   | 
+---------------------------------------
 - Tolerancia declarada: ±0.5 °C
 - Sensor: humedad de suelo capacitivo | Familia: A 
 - Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
@@ -71,7 +71,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 
-Reproducibilidad del punto de agua (se repite al menos dos veces por zona):
+Reproducibilidad del punto de agua 
 | Zona | Repetición 1 (mV) | Repetición 2 (mV) | Diferencia | Cabe en la tolerancia |
 |------|-------------------|-------------------|------------|------------------------|
 | 1    | 869               |  909              | 40         | si                     |
@@ -91,13 +91,7 @@ Reproducibilidad del punto de agua (se repite al menos dos veces por zona):
 
 k declarado: <valor>
 
-### Contraste con la GT1 (simulacion)
-En la GT1 el equipo calibro un sensor analogico simulado, donde el par (m, b)
-corregia un error sembrado por software. Aqui la cadena es la misma —cuentas del
-ADC1, dos puntos, filtro— pero el error ya existe y no se inyecta, y el modelo
-no se corrige: se construye, porque el sensor no tiene funcion de transferencia
-publicada.
-
+### Contraste con la GT1
 | Aspecto              | Simulacion (GT1) | Fisico (S4) |
 |----------------------|------------------|-------------|
 | Origen del error     | sembrado         | propio de cada ejemplar |
