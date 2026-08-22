@@ -40,38 +40,37 @@ Sensor: Humedad HD-38 | Familia: A | Referencia: docente de la seccion
 | Tercer punto     | dentro de tol.   | x           |            |
 ------------------------------------------------------------------
 Tolerancia declarada: ±0.5 °C
-Condiciones: temperatura , superficie , sustrato u otra según familia.
 
-Sensor: humedad de suelo capacitivo (2 unidades montadas) | Familia: A (analogico por ADC)
+Sensor: humedad de suelo capacitivo | Familia: A 
 Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
-Referencia validada por: <docente de la seccion>
+Referencia validada por: docente de la sección
 
-### Condiciones de la medicion (se fijan ANTES de medir)
-| Condicion                          | Valor declarado |
-|------------------------------------|-----------------|
-| Tension de alimentacion MEDIDA     | <3,3V> (verificado con multimetro) |
-| Canales empleados                  | Z1: GPIO 32, Z2: GPIO 33 (ADC1) |
-| Atenuacion del convertidor         | 11 dB, lectura en mV calibrados de fabrica |
-| Divisor a la entrada               | NO se emplea (Porque el sensor se alimenta de 3,3V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuracion) |
-| Lectura en aire dentro de la zona util | si / no (si toco el tope, NO se calibro) |
-| Tiempo de estabilizacion en cada punto | <s> antes de promediar |
+### Condiciones de la medición (se fijan ANTES de medir)
+|             Condición              |           Valor declarado          |
+|------------------------------------|------------------------------------|
+| Tensión de alimentación MEDIDA     |   3,2V (verificado con multimetro) |
+| Canales empleados                  |       Z1: GPIO 32, Z2: GPIO 33     |
+| Atenuación del convertidor         | 11 dB, lectura en mV calibrados de fabrica |
+| Divisor a la entrada               | NO se emplea (Porque el sensor se alimenta de 3,3V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuración) |
+| Lectura en aire dentro de la zona útil | si / no (si toco el tope, NO se calibro) |
+| Tiempo de estabilización en cada punto | <s> antes de promediar |
 | Sustrato de cada zona              | Z1: Agua  Z2: Agua |
-| Profundidad de insercion           | hasta <8cm>, MARCADA con cinta o plumon |
-| Temperatura ambiente               | <20°C> |
-| N de la media movil                | 5 |
+| Profundidad de inserción           |     hasta 8cm      |
+| Temperatura ambiente               |        20°C        |
+| N de la media móvil                |          5         |
 
 ### Tolerancia declarada ANTES de verificar
-| Criterio                                          | Tolerancia aceptada |
-|---------------------------------------------------|---------------------|
-| Dispersion aceptada en condicion estable, por zona | <± 2%> |
-| Separacion minima exigida entre aire y agua        | <500mV> |
-| Reproducibilidad del punto de agua entre repeticiones | <+/- mV> |
+|                      Criterio                         | Tolerancia aceptada |
+|-------------------------------------------------------|---------------------|
+| Dispersión aceptada en condición estable, por zona    |        ± 2%         |
+| Separación mínima exigida entre aire y agua           |        500mV        |
+| Reproducibilidad del punto de agua entre repeticiones |       <+/- mV>      |
 
 ### Calibracion de dos puntos, una fila por zona (en milivolts)
 | Zona | mV en aire | mV en agua | Separacion (mV) | m (%/mV) | b (%) |
 |------|------------|------------|-----------------|----------|-------|
-| 1    | <4095>     | <1108.3>   | <2986.7>        | <-0.033482>| <137.1088>|
-| 2    | <>         | <>         | <>              | <>       | <>    |
+| 1    |    3124    | <1108.3>   | <2986.7>        | <-0.033482>| <137.1088>|
+| 2    |    3124    | <>         | <>              | <>       | <>    |
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 
