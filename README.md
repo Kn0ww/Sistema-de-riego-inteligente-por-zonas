@@ -42,7 +42,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - Sensor: humedad de suelo capacitivo | Familia: A 
 - Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
 - Referencia validada por: docente de la sección
-### Condiciones de la medición 
+## Condiciones de la medición 
 |             Condición              |               Valor declarado              |
 |------------------------------------|--------------------------------------------|
 | Tensión de alimentación MEDIDA     |   3,2V (verificado con multímetro)         |
@@ -56,14 +56,14 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 | Temperatura ambiente                   |        20°C        |
 | N de la media móvil                    |          5         |
 
-### Tolerancia declarada
+## Tolerancia declarada
 |                      Criterio                         | Tolerancia aceptada |
 |-------------------------------------------------------|---------------------|
 | Dispersión aceptada en condición estable, por zona    |        ± 2%         |
 | Separación mínima exigida entre aire y agua           |        1000mV       |
 | Reproducibilidad del punto de agua entre repeticiones |       +/- 60 mV      |
 
-### Calibración de dos puntos
+## Calibración de dos puntos
 | Zona | mV en aire | mV en agua | Separación (mV) | m (%/mV) | b (%) |
 |------|------------|------------|-----------------|----------|-------|
 | 1    |    3124    | 922.5   |      2201.5        | −0.0454236 | 141.9032​ |
@@ -71,19 +71,19 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 
-Reproducibilidad del punto de agua 
+## Reproducibilidad del punto de agua 
 | Zona | Repetición 1 (mV) | Repetición 2 (mV) | Diferencia | Cabe en la tolerancia |
 |------|-------------------|-------------------|------------|------------------------|
 | 1    | 869               |  909              | 40         | si                     |
 | 2    | 592               |  618              | 26         | si                     |
 
-### Verificación en el tercer punto (tierra húmeda)
+## Verificación en el tercer punto (tierra húmeda)
 | Zona | mV  | Porcentaje | Valor SIN recortar | Estable y repetible |
 |------|-----|------------|--------------------|---------------------|
 | 1    | <>  | <>         | <>                 | si / no             |
 | 2    | <>  | <>         | <>                 | si / no             |
 
-### Dispersion medida (paso 4 + script)
+## Dispersion medida (paso 4 + script)
 | Zona | Condicion registrada | Media (%) | Dispersion (%) | Banda minima (k x disp) |
 |------|----------------------|-----------|----------------|-------------------------|
 | 1    | <aire / tierra>      | <>        | <>             | <>                      |
@@ -91,7 +91,7 @@ Reproducibilidad del punto de agua
 
 k declarado: <valor>
 
-### Contraste con la GT1
+## Contraste con la GT1
 | Aspecto              | Simulacion (GT1) | Fisico (S4) |
 |----------------------|------------------|-------------|
 | Origen del error     | sembrado         | propio de cada ejemplar |
