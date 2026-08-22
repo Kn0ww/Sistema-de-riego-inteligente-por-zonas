@@ -32,45 +32,45 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego.
 
 ## Verificación física del sensor (Semana 4, ítem 1 GT2)
-Sensor: Humedad HD-38 | Familia: A | Referencia: docente de la seccion
+Sensor: Humedad HD-38 | Familia: A | Referencia: docente de la sección
 | Parámetro        | Simulación (GT1) | Físico (S4) | Desviación |
 |------------------|------------------|-------------|------------|
 | m (ganancia)     | 0.94883          | x           |            |
 | b (offset)       | -1.955           | x           |            |
 | Tercer punto     | dentro de tol.   | x           |            |
 ------------------------------------------------------------------
-Tolerancia declarada: ±0.5 °C
+- Tolerancia declarada: ±0.5 °C
 
-Sensor: humedad de suelo capacitivo | Familia: A 
-Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
-Referencia validada por: docente de la sección
+- Sensor: humedad de suelo capacitivo | Familia: A 
+- Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
+- Referencia validada por: docente de la sección
 
 ### Condiciones de la medición (se fijan ANTES de medir)
-|             Condición              |           Valor declarado          |
-|------------------------------------|------------------------------------|
-| Tensión de alimentación MEDIDA     |   3,2V (verificado con multimetro) |
-| Canales empleados                  |       Z1: GPIO 32, Z2: GPIO 33     |
+|             Condición              |               Valor declarado              |
+|------------------------------------|--------------------------------------------|
+| Tensión de alimentación MEDIDA     |   3,2V (verificado con multímetro)         |
+| Canales empleados                  |          Z1: GPIO 32, Z2: GPIO 33          |
 | Atenuación del convertidor         | 11 dB, lectura en mV calibrados de fabrica |
 | Divisor a la entrada               | NO se emplea (Porque el sensor se alimenta de 3,3V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuración) |
-| Lectura en aire dentro de la zona útil | si / no (si toco el tope, NO se calibro) |
-| Tiempo de estabilización en cada punto | <s> antes de promediar |
-| Sustrato de cada zona              | Z1: Agua  Z2: Agua |
-| Profundidad de inserción           |     hasta 8cm      |
-| Temperatura ambiente               |        20°C        |
-| N de la media móvil                |          5         |
+| Lectura en aire dentro de la zona útil | no (si toco el tope, NO se calibro |
+| Tiempo de estabilización en cada punto |        7 s         |
+| Sustrato de cada zona                  | Z1: Agua  Z2: Agua |
+| Profundidad de inserción               |     hasta 8cm      |
+| Temperatura ambiente                   |        20°C        |
+| N de la media móvil                    |          5         |
 
-### Tolerancia declarada ANTES de verificar
+### Tolerancia declarada
 |                      Criterio                         | Tolerancia aceptada |
 |-------------------------------------------------------|---------------------|
 | Dispersión aceptada en condición estable, por zona    |        ± 2%         |
 | Separación mínima exigida entre aire y agua           |        500mV        |
 | Reproducibilidad del punto de agua entre repeticiones |       <+/- mV>      |
 
-### Calibracion de dos puntos, una fila por zona (en milivolts)
-| Zona | mV en aire | mV en agua | Separacion (mV) | m (%/mV) | b (%) |
+### Calibración de dos puntos
+| Zona | mV en aire | mV en agua | Separación (mV) | m (%/mV) | b (%) |
 |------|------------|------------|-----------------|----------|-------|
-| 1    |    3124    | <1108.3>   | <2986.7>        | <-0.033482>| <137.1088>|
-| 2    |    3124    | <>         | <>              | <>       | <>    |
+| 1    |    3124    | 922.5   |      2201.5        | −0.0454236 | 141.9032​ |
+| 2    |    3124    |          |               | <>       | <>    |
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 
