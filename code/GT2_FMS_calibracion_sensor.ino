@@ -128,10 +128,5 @@ void loop() {
 //
 // La profundidad de insercion es una CONDICION, no un detalle:
 //   El sensor mide a lo largo de toda su zona activa. Sumergir tres
-//   centimetros o cinco da lecturas muy distintas. Se marca la
-//   profundidad con cinta o plumon, se usa la misma para calibrar y
-//   para medir, y se declara en el README.
-//
-// El punto de agua NO es "sumergir el sensor": es sumergirlo hasta la
-// marca. Pasarse moja la electronica y arruina el modulo.
+//   centimetros o cinco da lecturas muy distintas.
 // ------------------------------------------------------------
