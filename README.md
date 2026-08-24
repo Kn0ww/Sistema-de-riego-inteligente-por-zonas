@@ -78,16 +78,16 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 | 2    | 592               |  618              | 26         | si                     |
 
 ## Verificación en el tercer punto (tierra húmeda)
-| Zona | mV  | Porcentaje | Valor SIN recortar | Estable y repetible |
+| Zona | mV  | Porcentaje (%) | Valor SIN recortar | Estable y repetible |
 |------|-----|------------|--------------------|---------------------|
-| 1    | <>  | <>         | <>                 | si / no             |
-| 2    | <>  | <>         | <>                 | si / no             |
+| 1    | 1036 | 94.8         | N/A             | si           |
+| 2    | 782  | 89.2        | N/A             | si           |
 
-## Dispersion medida (paso 4 + script)
-| Zona | Condicion registrada | Media (%) | Dispersion (%) | Banda minima (k x disp) |
+## Dispersión medida (paso 4 + script)
+| Zona | Condición registrada | Media (%) | Dispersión (%) | Banda minima (k x disp) |
 |------|----------------------|-----------|----------------|-------------------------|
-| 1    | <aire / tierra>      | <>        | <>             | <>                      |
-| 2    | <>                   | <>        | <>             | <>                      |
+| 1    | tierra     | 87.44      | 0.28             | 0.84                      |
+| 2    | tierra     | 83.2        | 0.20             | 0.60                      |
 
 k declarado: <valor>
 
