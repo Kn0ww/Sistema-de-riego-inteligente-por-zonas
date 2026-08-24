@@ -49,7 +49,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 | Canales empleados                  |          Z1: GPIO 32, Z2: GPIO 33          |
 | Atenuación del convertidor         | 11 dB, lectura en mV calibrados de fabrica |
 | Divisor a la entrada               | NO se emplea (Porque el sensor se alimenta de 3,3V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuración) |
-| Lectura en aire dentro de la zona útil | si toco el tope de saturación |
+| Lectura en aire dentro de la zona útil | NO, toco el tope de saturación por ende se trabajo con zona saturada. Ya que los sensores no lograron usarse con divisores de tensión |
 | Tiempo de estabilización en cada punto |        10 s         |
 | Sustrato de cada zona                  | Z1: Agua  Z2: Agua |
 | Profundidad de inserción               |     hasta 8cm      |
