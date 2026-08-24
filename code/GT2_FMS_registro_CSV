@@ -1,0 +1,93 @@
+// ============================================================
+// Fundamentos de IoT 2026 
+// P8 · Sistema de riego inteligente por zonas · E03
+//
+// Registro CSV y dispersion por zona
+// Objetivo unico: producir la evidencia numerica del item 1. Con el
+// sensor quieto en una condicion estable, registra tres minutos de
+// lecturas de las dos zonas. La dispersion que se observe es lo que
+// dimensionara la banda de histeresis de la GT3: una banda menor que
+// la dispersion no evita que la bomba oscile.
+// ============================================================
+
+// ---------- 1. Configuracion ----------
+const int N_ZONAS = 2;                    // zonas montadas
+const int PIN_ZONA[N_ZONAS] = {32, 33};
+const unsigned long PERIODO_MS = 1000;
+const int N_FILTRO = 5;
+
+const float M_ZONA[N_ZONAS] = {-0.0454236, -0.0380531};   // <-- del paso 2
+const float B_ZONA[N_ZONAS] = {141.9032,  118.9187};      // <-- del paso 2
+
+// ---------- 2. Estado interno ----------
+unsigned long t_previo = 0;
+unsigned long n_muestra = 0;
+int  ventana[N_ZONAS][N_FILTRO];
+int  indice[N_ZONAS] = {0, 0};
+bool llena[N_ZONAS]  = {false, false};
+
+// ---------- 3. Funciones auxiliares ----------
+int leer_mv(int pin) {
+  long suma = 0;
+  for (int i = 0; i < 8; i++) suma += analogReadMilliVolts(pin);
+  return (int)(suma / 8);
+}
+
+int filtrar(int z, int valor) {
+  ventana[z][indice[z]] = valor;
+  indice[z] = (indice[z] + 1) % N_FILTRO;
+  if (indice[z] == 0) llena[z] = true;
+  int tope = llena[z] ? N_FILTRO : indice[z];
+  long suma = 0;
+  for (int i = 0; i < tope; i++) suma += ventana[z][i];
+  return (int)(suma / tope);
+}
+
+float a_porcentaje(int z, int mv) {
+  float h = M_ZONA[z] * mv + B_ZONA[z];
+  if (h < 0)   h = 0;
+  if (h > 100) h = 100;
+  return h;
+}
+
+// ---------- 4. Programa ----------
+void setup() {
+  Serial.begin(115200);
+  for (int z = 0; z < N_ZONAS; z++) analogSetPinAttenuation(PIN_ZONA[z], ADC_11db);
+  Serial.println("# P8 registro de dispersion por zona - E03 - S4 (v1.1)");
+  Serial.println("# condicion: <aire / tierra humeda>  sustrato: <cual>");
+  Serial.println("# profundidad de insercion: <cm, la misma de la calibracion>");
+  Serial.println("n,t_s,z1_mv,z1_pc,z2_mv,z2_pc");
+}
+
+void loop() {
+  unsigned long ahora = millis();
+
+  if (ahora - t_previo >= PERIODO_MS) {
+    t_previo = ahora;
+    n_muestra++;
+
+    int mv[N_ZONAS];
+    float pc[N_ZONAS];
+    for (int z = 0; z < N_ZONAS; z++) {
+      mv[z] = filtrar(z, leer_mv(PIN_ZONA[z]));
+      pc[z] = a_porcentaje(z, mv[z]);
+    }
+
+    Serial.printf("%lu,%lu,%d,%.1f,%d,%.1f\n",
+                  n_muestra, ahora / 1000, mv[0], pc[0], mv[1], pc[1]);
+  }
+}
+
+// ------------------------------------------------------------
+// Que sale de este registro:
+//   dispersion por zona (desviacion estandar en puntos porcentuales)
+//   -> la banda de histeresis de cada zona debe SUPERARLA.
+//
+// Las dos zonas tendran dispersiones distintas. Ese es el argumento de
+// la fila del anexo: histeresis por zona con umbrales propios, no un
+// umbral unico copiado a ambas.
+//
+// La profundidad de insercion viaja en el encabezado del CSV porque un
+// registro sin esa condicion no se puede comparar con ningun otro.
+// ------------------------------------------------------------
