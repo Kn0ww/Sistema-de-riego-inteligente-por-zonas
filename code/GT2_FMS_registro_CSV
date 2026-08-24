@@ -1,8 +1,8 @@
 // ============================================================
-// Fundamentos de IoT 2026 
+// Fundamentos de IoT 2026 · Semana 4 
 // P8 · Sistema de riego inteligente por zonas · E03
-//
 // Registro CSV y dispersion por zona
+//
 // Objetivo unico: producir la evidencia numerica del item 1. Con el
 // sensor quieto en una condicion estable, registra tres minutos de
 // lecturas de las dos zonas. La dispersion que se observe es lo que
