@@ -74,8 +74,8 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 ## Reproducibilidad del punto de agua 
 | Zona | Repetición 1 (mV) | Repetición 2 (mV) | Diferencia | Cabe en la tolerancia |
 |------|-------------------|-------------------|------------|------------------------|
-| 1    | 869               |  909              | 40         | si                     |
-| 2    | 592               |  618              | 26         | si                     |
+| 1    | 600               |  725              | 125        | no                     |
+| 2    | 632               |  648              | 16         | si                     |
 
 ## Verificación en el tercer punto (tierra húmeda)
 | Zona | mV  | Porcentaje (%) | Valor SIN recortar | Estable y repetible |
