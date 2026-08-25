@@ -31,7 +31,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 ## Ventana del filtro
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego.
 
-## Verificación física del sensor
+## Verificación sensor simulado
 | Parámetro        | Simulación (GT1) | 
 |------------------|------------------|
 | m (ganancia)     | 0.94883          |
