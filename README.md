@@ -83,7 +83,7 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 | 1    | 1036 | 94.8         | N/A             | si           |
 | 2    | 782  | 89.2        | N/A             | si           |
 
-## Dispersión medida (paso 4 + script)
+## Dispersión medida 
 | Zona | Condición registrada | Media (%) | Dispersión (%) | Banda minima (k x disp) |
 |------|----------------------|-----------|----------------|-------------------------|
 | 1    | tierra     | 87.44      | 0.28             | 0.84                      |
