@@ -80,7 +80,7 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 ## Verificación en el tercer punto (tierra húmeda)
 | Zona | mV  | Porcentaje (%) | Valor SIN recortar | Estable y repetible |
 |------|-----|------------|--------------------|---------------------|
-| 1    | 1036 | 94.8         | N/A             | si           |
+| 1    | 719 | 96.6         | N/A             | si           |
 | 2    | 782  | 89.2        | N/A             | si           |
 
 ## Dispersión medida 
