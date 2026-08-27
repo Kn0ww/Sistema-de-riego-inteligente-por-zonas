@@ -65,7 +65,7 @@ const float B_CAL = -1.955f;           // offset    [grados C]
 // Simulacion explicita del ruido que el ADC real si tiene y el simulador no.
 // Se declara aqui porque en la Semana 4, con el sensor fisico, esta linea
 // se elimina: el ruido deja de ser simulado y pasa a ser un problema real.
-const bool  SIMULAR_RUIDO = false;
+const bool  SIMULAR_RUIDO = true;
 const float RUIDO_CUENTAS = 25.0f;     // [cuentas] amplitud del ruido simulado
 
 // ---------------------------------------------------------------------------
