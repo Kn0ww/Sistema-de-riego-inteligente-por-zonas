@@ -227,10 +227,9 @@ void loop() {
 /* ==========================================================================
    Retardo
    
-   Elegimos el periodo de 60.000ms(1 minuto) por que la humedad de la tierra es un
-   proceso muy lento que no cambia a lo mas tardar minutos u horas.
-   Ademas si el sensor midiera cada 10 segundos por ejemplo ,estariamos saturando el sistema
-   gastando memoria, electricidad para leer el mismo dato una y otra vez.
+   Se utiliza un filtro de media móvil de \(N=5\) muestras. Este filtro introduce un desfase de \((N-1)/2=2\) 
+   muestras. Considerando un período de muestreo de 60 s, el retardo equivalente es de 120 s. Este retardo es compatible con la decisión de 
+   riego, ya que existe suficiente margen temporal para realizar la decisión sin afectar significativamente la respuesta del sistema.
    
    ========================================================================== */
 /* ==========================================================================
