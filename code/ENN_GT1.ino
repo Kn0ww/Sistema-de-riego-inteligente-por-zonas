@@ -235,8 +235,9 @@ void loop() {
 /* ==========================================================================
 
 //La variabilidad entre unidades obliga a registrar tres pares $(m, b)$ distintos.
-//Tres electroválvulas solenoides: no accionar simultáneamente. Riel de 12 V independiente 
-  y secuenciación por zona en la máquina de estados
+   //Usaremos un servomotor alimentado a 5V para mover físicamente una manguera y elegir cuál de las 2 zonas regar. 
+   // Esto descarta el uso de electroválvulas y elimina el riel de 12V.
+
 
 /* ==========================================================================
    ITEM 8) Defensa
