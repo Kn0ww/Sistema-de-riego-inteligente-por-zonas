@@ -31,7 +31,7 @@ const bool     USAR_MEDIANA = false;   // false: media movil | true: mediana
 const float V_REF        = 3.3f;       // [V] tension de referencia del ADC
 const uint16_t CUENTAS_MAX = 4095;     // ADC de 12 bits: 0 a 4095
 const float ESCALA_SENSOR = 80.0f;    // [grados C / V] sensibilidad nominal
-const float OFFSET_SENSOR = 2.10f;      // [grados C] a 0 V, segun hoja de datos
+const float OFFSET_SENSOR = 0.0f;      // [grados C] a 0 V, segun hoja de datos
 
 // ---------------------------------------------------------------------------
 // ERROR SISTEMATICO SIMULADO
@@ -54,7 +54,7 @@ const float OFFSET_SENSOR = 2.10f;      // [grados C] a 0 V, segun hoja de datos
 const bool SIMULAR_ERROR_SISTEMATICO = true;
 
 const float GANANCIA_ERROR_SIM = 1.05f;  // +5 % de error de ganancia
-const float OFFSET_ERROR_SIM = 2.0f;     // [grados C] error de offset
+const float OFFSET_ERROR_SIM = 2.10f;     // [grados C] error de offset
 
 // Constantes de la CALIBRACION DE DOS PUNTOS.
 
