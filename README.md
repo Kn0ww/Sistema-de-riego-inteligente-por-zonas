@@ -2,7 +2,7 @@
 <img width="1920" height="1048" alt="IoT-e1736873173433" src="https://github.com/user-attachments/assets/297ca89b-2a66-44c3-b533-7e006c271a91" />
 
 ## Objetivo
-Diseñar e implementar un sistema de riego automático basado en IoT, capaz de monitorear la humedad del suelo y controlar el riego de manera independiente para 2 ZONAS.
+Diseñar e implementar un sistema de riego automático basado en IoT, capaz de monitorear la humedad del suelo y controlar el riego de manera independiente para 2 ZONAS validada por el docente de la sección.
 
 ## Integrantes
 - David Morales
@@ -13,7 +13,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
   
 ## Hardware
 - Microcontrolador ESP32
-- 2 sensor de humedad capacitivo
+- 2 sensores de humedad HD-38
 - Relé de 4 canales HW-316
 - Mini bomba de agua R385 DC 5V
 - Pantalla LCD 16×2 GDM1602K
