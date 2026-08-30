@@ -100,10 +100,21 @@ k declarado: <valor>
 | Numero de pares      | 1                | 2, uno por zona |
 | Desviacion observada | ---              | <diferencia entre los tres pares> |
 
-### Hallazgo del equipo
+## Hallazgo del equipo
 <Comparar los dos pares entre si. Indicar cuanto difieren y cual zona resulto la
 mas ruidosa, y explicar por que eso obliga a darle una banda de histeresis mayor
 que a la otra.>
 
+### Limitaciones registradas
+- La escala construida vale para el ejemplar, el sustrato Y la profundidad de
+  insercion declarados. Cambiar cualquiera de los tres obliga a recalibrar.
+- La lectura se toma en milivolts calibrados de fabrica. El convertidor del
+  ESP32 responde de forma util entre unos 150 y 2450 mV: fuera de ese rango la
+  medicion se comprime o se recorta.
+- El porcentaje informado es una posicion relativa entre aire y agua, no un
+  contenido volumetrico de agua medido contra patron.
+- La dispersion registrada corresponde a la condicion declarada. En otra
+  condicion, la dispersion puede ser distinta.
+- P8 es un prototipo educativo.
 
 mucho que los porcentajes resultantes parezcan razonables.
