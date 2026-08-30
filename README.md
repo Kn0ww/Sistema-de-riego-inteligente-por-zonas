@@ -42,6 +42,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - Tolerancia declarada: ±0.5 °C
 - Sensor: humedad de suelo capacitivo | Familia: A 
 - Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
+- Porcentaje humedad sensores(%): El sensor entrega un índice relativo de humedad para nuestro sustrato.
 - Referencia validada por: docente de la sección
 ## Condiciones de la medición 
 |             Condición              |               Valor declarado              |
