@@ -178,8 +178,7 @@ const char* nombreEstado(Estado e) {
 // ==========================================================================
 // 16. CAMBIO DE ESTADO
 // ==========================================================================
-// ÚNICA función que cambia "estado".
-// También reinicia el temporizador de entrada.
+// ÚNICA función que cambia "estado". También reinicia el temporizador de entrada.
 void cambiar(Estado nuevoEstado) {
   if (estado == nuevoEstado) {
     return;
