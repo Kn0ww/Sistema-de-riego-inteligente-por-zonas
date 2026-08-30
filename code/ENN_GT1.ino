@@ -233,12 +233,8 @@ void loop() {
    
    ========================================================================== */
 /* ==========================================================================
-
-//La variabilidad entre unidades obliga a registrar tres pares $(m, b)$ distintos.
+   //La variabilidad entre unidades obliga a registrar 2 pares $(m, b)$ distintos.
    //Usaremos un servomotor alimentado a 5V para mover físicamente una manguera y elegir cuál de las 2 zonas regar. 
-   // Esto descarta el uso de electroválvulas y elimina el riel de 12V.
-
-
 /* ==========================================================================
    ITEM 8) Defensa
    Dado que el simulador ded Wokwi asume todo perfecto y componentes ideales, obviamente carece
