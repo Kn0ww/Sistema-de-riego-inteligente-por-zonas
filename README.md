@@ -116,5 +116,3 @@ que a la otra.>
 - La dispersion registrada corresponde a la condicion declarada. En otra
   condicion, la dispersion puede ser distinta.
 - P8 es un prototipo educativo.
-
-mucho que los porcentajes resultantes parezcan razonables.
