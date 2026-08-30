@@ -1,8 +1,5 @@
 /* =========================================================================
    PROYECTO: Sistema de Riego Automatizado con ESP32
-   FSM + conversión a % + filtro + LCD 16x2 + relé + LED + buzzer + botón
-   SENSOR:
-   - 1 sensor de humedad en GPIO 34 (ADC1)
    FSM:
    VIGILANDO
       P < 30%  -> REGANDO
@@ -14,8 +11,7 @@
    ERROR_SEGURO
       2 lecturas seguidas al 100% o botón de paro
       botón de rearme -> VIGILANDO
-   No se utiliza delay().
-   ========================================================================= */
+========================================================================= */
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 // ==========================================================================
@@ -31,11 +27,8 @@ const uint8_t PIN_BOTON          = 33;
 // ==========================================================================
 // 2. RELÉ
 // ==========================================================================
-// LOW  = relé activado
-// HIGH = relé desactivado
-const uint8_t RELE_ON  = LOW;
-const uint8_t RELE_OFF = HIGH;
-// ==========================================================================
+const uint8_t RELE_ON  = LOW; // LOW  = relé activado
+const uint8_t RELE_OFF = HIGH; // HIGH = relé desactivado
 // 3. LCD
 // ==========================================================================
 LiquidCrystal_I2C lcd(0x27, 16, 2);
@@ -43,10 +36,8 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 // 4. ADQUISICIÓN Y FILTRADO
 // ==========================================================================
 // Periodo de muestreo: 60000 ms = 1 minuto
-// const uint32_t PERIODO_SENSOR_MS = 60000;
-// Media móvil de 5 muestras
-const uint8_t N_FILTRO = 5;
-// Calibración de tu sensor de la GT1.
+const uint8_t N_FILTRO = 5; // Media móvil de 5 muestras
+// Calibración de sensor
 // % = M * mV + B
 const float M = -0.0454236f;
 const float B = 141.9032f;
@@ -61,7 +52,7 @@ const float P_REGANDO_VIGILANDO = 40.0f;
 
 const float P_REGANDO_ALERTA    = 20.0f;
 const float P_ALERTA_REGANDO    = 25.0f;
-// ========================================================================
+// ==========================================================================
 // 6. MÁQUINA DE ESTADOS
 // ==========================================================================
 enum Estado : uint8_t {
@@ -74,27 +65,19 @@ Estado estado = VIGILANDO;
 // ==========================================================================
 // 7. TEMPORIZACIÓN
 // ==========================================================================
-// Mrca guardada al entrar al estado.
-// La clase usa exactamente este patrón.
-uint32_t t_entrada = 0;
-// Temporización del sensor
-uint32_t t_sensor = 0;
-// Temporización del botón para antirrebote
-uint32_t t_boton = 0;
+uint32_t t_entrada = 0; // Marca guardada al entrar al estado.
+uint32_t t_sensor = 0; // Temporización del sensor
+uint32_t t_boton = 0; // Temporización del botón para antirrebote
 const uint32_t DEBOUNCE_MS = 50;
-// Temporización del buzzer
-uint32_t t_buzzer = 0;
+uint32_t t_buzzer = 0; // Temporización del buzzer
 const uint32_t PERIODO_BUZZER_MS = 300;
-
 bool buzzerEstado = false;
-
 uint32_t t_lcd = 0;
 const uint32_t PERIODO_LCD_MS = 250;
 // ==========================================================================
 // 8. FILTRO
 // ==========================================================================
 int ventana[N_FILTRO] = {0};
-
 uint8_t indiceFiltro = 0;
 bool filtroLleno = false;
 // ==========================================================================
@@ -165,8 +148,7 @@ int filtrar(int valor) {
 // 14. CONVERSIÓN mV -> PORCENTAJE
 // ==========================================================================
 float convertirPorcentaje(int mv) {
-  float porcentaje = M * mv + B;
-  // Guardamos el valor sin limitar para diagnóstico
+  float porcentaje = M * mv + B;   // Guardamos el valor sin limitar para diagnóstico
   humedadSinRecortar = porcentaje;
   // Limitar al rango 0 ... 100 %
   if (porcentaje < 0.0f) {
@@ -184,13 +166,10 @@ const char* nombreEstado(Estado e) {
   switch (e) {
     case VIGILANDO:
       return "VIGILANDO";
-
     case REGANDO:
       return "REGANDO";
-
     case ALERTA:
       return "ALERTA";
-
     case ERROR_SEGURO:
       return "ERROR_SEGURO";
   }
@@ -211,9 +190,7 @@ void cambiar(Estado nuevoEstado) {
   // Reiniciar temporizador del buzzer
   t_buzzer = millis();
   buzzerEstado = false;
-
   digitalWrite(PIN_BUZZER, LOW);
-
   Serial.print("[");
   Serial.print(millis());
   Serial.print(" ms] -> ");
@@ -228,14 +205,10 @@ bool botonPresionado() {
     t_boton = millis();
     botonAnterior = lectura;
   }
-  // Esperar solamente mediante millis(), nunca delay()
-  if (millis() - t_boton >= DEBOUNCE_MS) {
+  if (millis() - t_boton >= DEBOUNCE_MS) {   // Esperar solamente mediante millis()
     if (lectura != botonEstable) {
-
       botonEstable = lectura;
-
-      // LOW = botón presionado
-      if (botonEstable == LOW) {
+      if (botonEstable == LOW) {  // LOW = botón presionado
         return true;
       }
     }
@@ -259,54 +232,35 @@ void buzzerIntermitente() {
 // ==========================================================================
 void actualizarActuadores() {
   switch (estado) {
-    // ------------------------------------------------------
     // VIGILANDO
-    // ------------------------------------------------------
     case VIGILANDO:
       digitalWrite(PIN_RELE, RELE_OFF);
-
       digitalWrite(PIN_LED_VERDE, HIGH);
       digitalWrite(PIN_LED_ROJO, LOW);
-
       digitalWrite(PIN_BUZZER, LOW);
-
       break;
-    // ------------------------------------------------------
     // REGANDO
-    // ------------------------------------------------------
     case REGANDO:
       digitalWrite(PIN_RELE, RELE_ON);
-
       digitalWrite(PIN_LED_VERDE, HIGH);
       digitalWrite(PIN_LED_ROJO, LOW);
-
       digitalWrite(PIN_BUZZER, LOW);
       break;
-    // ------------------------------------------------------
     // ALERTA
-    // ------------------------------------------------------
     case ALERTA:
       digitalWrite(PIN_RELE, RELE_ON);
-
       digitalWrite(PIN_LED_VERDE, LOW);
       digitalWrite(PIN_LED_ROJO, HIGH);
-
       buzzerIntermitente();
-
       break;
-    // ------------------------------------------------------
     // ERROR SEGURO
-    // ------------------------------------------------------
     case ERROR_SEGURO:
       // Salida segura:
       // relé apagado
       digitalWrite(PIN_RELE, RELE_OFF);
-
       digitalWrite(PIN_LED_VERDE, LOW);
       digitalWrite(PIN_LED_ROJO, HIGH);
-
       buzzerIntermitente();
-
       break;
   }
 }
@@ -315,19 +269,15 @@ void actualizarActuadores() {
 // ==========================================================================
 void actualizarLCD() {
   uint32_t ahora = millis();
-  
-  // ---> Temporizador del LCD <---
-  if (ahora - t_lcd >= PERIODO_LCD_MS) {
-    t_lcd = ahora;
 
-    // --------- Primera fila ----------
-    lcd.setCursor(0, 0);
+  if (ahora - t_lcd >= PERIODO_LCD_MS) {  // Temporizador del LCD
+    t_lcd = ahora;
+    lcd.setCursor(0, 0);     // --------- Primera fila ----------
     lcd.print("Humedad: ");
     lcd.print(humedadPorcentaje, 1);
     lcd.print("%   ");
-    
-    // ---------- Segunda fila ----------
-    lcd.setCursor(0, 1);
+
+    lcd.setCursor(0, 1);     // ---------- Segunda fila ----------
     switch (estado) {
       case VIGILANDO:
         lcd.print("Vigilando      ");
@@ -349,60 +299,43 @@ void actualizarLCD() {
 // ==========================================================================
 void actualizarSensor() {
   uint32_t ahora = millis();
-
-  // ---> NUEVA LÓGICA DE TIEMPO DINÁMICO <---
+  //LÓGICA DE TIEMPO DINÁMICO
   uint32_t periodoActual;
   if (estado == VIGILANDO) {
     periodoActual = 60000; // 60 segundos (1 minuto) en VIGILANDO
   } else {
     periodoActual = 1000;  // 1 segundo en el resto de estados
   }
-
   switch (estadoSensor) {
-    
     // ------------------------------------------------------
     // CASO 1: El sensor está apagado esperando su turno
     // ------------------------------------------------------
     case SENSOR_REPOSO:
-      // Usamos la variable dinámica "periodoActual"
-      if (ahora - t_sensor >= periodoActual) {
+      if (ahora - t_sensor >= periodoActual) { // Usamos la variable dinámica "periodoActual"
         t_sensor = ahora; 
-        
-        // ENCENDER SENSOR
-        digitalWrite(PIN_ENERGIA_SENSOR, HIGH);
+        digitalWrite(PIN_ENERGIA_SENSOR, HIGH); // ENCENDER SENSOR
         t_encendido_sensor = ahora;
         estadoSensor = SENSOR_ESPERANDO_300MS;
       }
       break;
-
     // ------------------------------------------------------
     // CASO 2: El sensor está encendido, esperando estabilizarse
     // ------------------------------------------------------
     case SENSOR_ESPERANDO_300MS:
       if (ahora - t_encendido_sensor >= 300) {
-        
-        // MEDIR Y APAGAR SENSOR
-        lecturaCruda_mV = leer_mV();
+        lecturaCruda_mV = leer_mV(); // MEDIR Y APAGAR SENSOR
         digitalWrite(PIN_ENERGIA_SENSOR, LOW);
-        
-        // Filtrado y conversión
-        lecturaFiltrada_mV = filtrar(lecturaCruda_mV);
+        lecturaFiltrada_mV = filtrar(lecturaCruda_mV); // Filtrado y conversión
         humedadPorcentaje = convertirPorcentaje(lecturaFiltrada_mV);
-
-        // Diagnóstico de dos lecturas al 100 %
-        if (humedadPorcentaje >= 99.9f) {
+        if (humedadPorcentaje >= 99.9f) {  // Diagnóstico de dos lecturas al 100 %
           lecturas100++;
         } else {
           lecturas100 = 0;
         }
-
-        // Monitor serie
-        Serial.print(" mV | Humedad: ");
+        Serial.print(" mV | Humedad: "); // Monitor serie
         Serial.print(humedadPorcentaje, 1);
         Serial.println(" %");
-
-        // Volver al estado de reposo para el siguiente ciclo
-        estadoSensor = SENSOR_REPOSO;
+        estadoSensor = SENSOR_REPOSO;  // Volver al estado de reposo para el siguiente ciclo
       }
       break;
   }
@@ -412,21 +345,14 @@ void actualizarSensor() {
 // ==========================================================================
 void ejecutarFSM() {
   // ========================================================================
-  // EVENTOS GLOBALES
-  // Aplican desde cualquier estado excepto ERROR_SEGURO
+  // EVENTOS GLOBALES - Aplican desde cualquier estado excepto ERROR_SEGURO
   // ========================================================================
   if (estado != ERROR_SEGURO) {
-    // ------------------------------------------------------
-    // Botón de paro
-    // ------------------------------------------------------
-    if (botonPresionado()) {
+    if (botonPresionado()) { // Botón de paro
       cambiar(ERROR_SEGURO);
       return;
     }
-    // ------------------------------------------------------
-    // Dos lecturas consecutivas al 100 %
-    // ------------------------------------------------------
-    if (lecturas100 >= 2) {
+    if (lecturas100 >= 2) { // Dos lecturas consecutivas al 100 %
       lecturas100 = 0;
       cambiar(ERROR_SEGURO);
       return;
@@ -436,45 +362,29 @@ void ejecutarFSM() {
   // FSM: UN CASE POR CADA ESTADO
   // ========================================================================
   switch (estado) {
-    // ======================================================================
-    // VIGILANDO
-    // ======================================================================
-    case VIGILANDO:
-      // P < 30 % -> REGANDO
-      if (humedadPorcentaje < P_VIGILANDO_REGANDO) {
+    case VIGILANDO: // VIGILANDO
+      if (humedadPorcentaje < P_VIGILANDO_REGANDO) { // P < 30 % -> REGANDO
         cambiar(REGANDO);
       }
       break;
-    // ======================================================================
-    // REGANDO
-    // ======================================================================
-    case REGANDO:
-      // P > 40 % -> VIGILANDO
-      if (humedadPorcentaje > P_REGANDO_VIGILANDO) {
+    case REGANDO: // REGANDO
+      if (humedadPorcentaje > P_REGANDO_VIGILANDO) { // P > 40 % -> VIGILANDO
         cambiar(VIGILANDO);
       }
-      // P < 20 % -> ALERTA
-      else if (humedadPorcentaje < P_REGANDO_ALERTA) {
+      else if (humedadPorcentaje < P_REGANDO_ALERTA) { // P < 20 % -> ALERTA
         cambiar(ALERTA);
       }
       break;
-    // ======================================================================
-    // ALERTA
-    // ======================================================================
-    case ALERTA:
-      // P > 25 % -> REGANDO
-      if (humedadPorcentaje > P_ALERTA_REGANDO) {
+    case ALERTA: // ALERTA
+      if (humedadPorcentaje > P_ALERTA_REGANDO) { // P > 25 % -> REGANDO
         cambiar(REGANDO);
       }
       break;
     // ======================================================================
     // ERROR SEGURO
     // ======================================================================
-    case ERROR_SEGURO:
-      // El sistema permanece aquí
-      // hasta recibir el botón de rearme.
-      if (botonPresionado()) {
-        // Reiniciar contador de fallas
+    case ERROR_SEGURO: // El sistema permanece aquí hasta recibir el botón de rearme.
+      if (botonPresionado()) { // Reiniciar contador de fallas
         lecturas100 = 0;
         cambiar(VIGILANDO);
       }
@@ -486,38 +396,27 @@ void ejecutarFSM() {
 // ==========================================================================
 void setup() {
   Serial.begin(115200);
-  // ------------------------------------------------------------------------
-  // Sensor ADC
-  // ------------------------------------------------------------------------
-  analogSetPinAttenuation(
+  analogSetPinAttenuation( // Sensor ADC
     PIN_SENSOR_HUMEDAD,
     ADC_11db
   );
-  //-------------------------------------------------------------------------
   // Salidas
-  // ------------------------------------------------------------------------
-  pinMode(PIN_RELE, OUTPUT);
+  pinMode(PIN_RELE, OUTPUT); 
   pinMode(PIN_LED_VERDE, OUTPUT);
   pinMode(PIN_LED_ROJO, OUTPUT);
   pinMode(PIN_BUZZER, OUTPUT);
   pinMode(PIN_ENERGIA_SENSOR, OUTPUT);
   digitalWrite(PIN_ENERGIA_SENSOR, LOW); // Inicia apagado
-  // ------------------------------------------------------------------------
-  // Botón
-  // ------------------------------------------------------------------------
-  pinMode(PIN_BOTON, INPUT_PULLUP);
-  // ------------------------------------------------------------------------
+
+  pinMode(PIN_BOTON, INPUT_PULLUP);  // Botón
   // Estado seguro inicial
-  // ------------------------------------------------------------------------
   digitalWrite(PIN_RELE, RELE_OFF);
 
   digitalWrite(PIN_LED_VERDE, LOW);
   digitalWrite(PIN_LED_ROJO, LOW);
 
   digitalWrite(PIN_BUZZER, LOW);
-  // ------------------------------------------------------------------------
   // LCD
-  // ------------------------------------------------------------------------
   lcd.init();
   lcd.backlight();
 
@@ -528,11 +427,8 @@ void setup() {
 
   lcd.setCursor(0, 1);
   lcd.print("FSM iniciada");
-  // ------------------------------------------------------------------------
   // Inicialización del temporizador del estado
-  // ------------------------------------------------------------------------
   t_entrada = millis();
-
   t_sensor = millis();
   t_boton = millis();
   t_buzzer = millis();
@@ -554,29 +450,13 @@ void setup() {
 // ==========================================================================
 void loop() {
   uint32_t ahora = millis();
-  // ========================================================================
-  // 1. SENSOR
-  // ========================================================================
-  actualizarSensor();
-  // ========================================================================
-  // 2. FSM
-  // ========================================================================
-  ejecutarFSM();
-  // ========================================================================
-  // 3. ACTUADORES
-  // ========================================================================
-  actualizarActuadores();
-  // ========================================================================
-  // 4. LCD
-  // ========================================================================
-  actualizarLCD();
-  // ========================================================================
+  actualizarSensor(); // 1. SENSOR
+  ejecutarFSM(); // 2. FSM
+  actualizarActuadores(); // 3. ACTUADORES
+  actualizarLCD(); // 4. LCD
   // 5. TEMPORIZADOR DEL ESTADO
-  // ========================================================================
-  // Se consulta en CADA vuelta del loop.
-  // No bloquea el programa.
+  // Se consulta en CADA vuelta del loop y no bloquea el programa.
   uint32_t tiempoEnEstado = ahora - t_entrada;
-  // Esta variable permite comprobar cuánto tiempo lleva
-  // el sistema dentro del estado actual.
+  // Esta variable permite comprobar cuánto tiempo lleva el sistema dentro del estado actual.
   (void)tiempoEnEstado;
 }
