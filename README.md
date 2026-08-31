@@ -101,9 +101,9 @@ k declarado: <valor>
 | Desviacion observada | ---              | <diferencia entre los tres pares> |
 
 ## Hallazgo del equipo
-<Comparar los dos pares entre si. Indicar cuanto difieren y cual zona resulto la
-mas ruidosa, y explicar por que eso obliga a darle una banda de histeresis mayor
-que a la otra.>
+La diferencia entre las medias es de 0,60 puntos porcentuales, mientras que la dispersión de la Zona 1 es 0,12 puntos porcentuales mayor que la de la Zona 2. Por lo tanto, la Zona 1 resultó ser la más ruidosa.
+
+Esto obliga a darle a la Zona 1 una banda de histéresis mayor, ya que presenta más variación en sus lecturas. Una banda demasiado pequeña podría hacer que el sistema cambie repetidamente entre regar y no regar debido al ruido del sensor, provocando una oscilación de la bomba. La Zona 2, al ser menos dispersa, puede utilizar una banda menor.
 
 ### Limitaciones registradas
 - La escala construida vale para el ejemplar, el sustrato Y la profundidad de
