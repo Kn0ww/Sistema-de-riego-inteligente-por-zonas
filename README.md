@@ -91,7 +91,7 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 | 1    | tierra     | 87.44      | 0.28             | 0.84                      |
 | 2    | tierra     | 83.2        | 0.20             | 0.60                      |
 
-k declarado: <valor>
+k declarado: 3
 
 ## Contraste con la GT1
 | Aspecto              | Simulacion (GT1) | Fisico (S4) |
