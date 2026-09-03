@@ -10,6 +10,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - Sofia Aedo
 - Mauricio Lobo
 - Xavier Lopez
+- Cristobal Barahona
   
 ## Hardware
 - Microcontrolador ESP32
