@@ -5,7 +5,7 @@
 Diseñar e implementar un sistema de riego automático basado en IoT, capaz de monitorear la humedad del suelo y controlar el riego de manera independiente para 2 ZONAS validada por el docente de la sección.
 
 ## Integrantes
-- David Morales
+- David Morales  
 - Alex Camacaro
 - Sofia Aedo
 - Mauricio Lobo
@@ -30,7 +30,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 
 ## Ventana del filtro
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego.
-- Tolerancia declarada: ±0.5 °C
+
 ## Verificación sensor simulado
 | Parámetro        | Simulación (GT1) | 
 |------------------|------------------|
@@ -38,8 +38,11 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 | b (offset)       | -1.955           |
 | Tercer punto     | dentro de tol.   | 
 ---------------------------------------
+- Tolerancia declarada sensor simulado: ±0.5 °C
 
-- Sensor: humedad de suelo capacitivo | Familia: A 
+## Sistema de riego
+
+- Sensor: humedad de suelo resistivo | Familia: A 
 - Referencia: dos condiciones conocidas, aire (0 %) y agua (100 %)
 - Porcentaje humedad sensores(%): El sensor entrega un índice relativo de humedad para nuestro sustrato.
 - Referencia validada por: docente de la sección
