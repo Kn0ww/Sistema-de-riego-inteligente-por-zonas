@@ -227,7 +227,7 @@ void loop() {
 /* ==========================================================================
    Retardo
    
-   Se utiliza un filtro de media móvil de \(N=5\) muestras. Este filtro introduce un desfase de \((N-1)/2=2\) 
+   Se utiliza un filtro de media móvil de N = 5 muestras. Este filtro introduce un desfase de (N-1)/2 = 2 
    muestras. Considerando un período de muestreo de 60 s, el retardo equivalente es de 120 s. Este retardo es compatible con la decisión de 
    riego, ya que existe suficiente margen temporal para realizar la decisión sin afectar significativamente la respuesta del sistema.
    
