@@ -71,29 +71,28 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 ## Calibración de dos puntos
 | Zona | mV en aire | mV en agua | Separación (mV) | m (%/mV) | b (%) |
 |------|------------|------------|-----------------|----------|-------|
-| 1    |    2356.6  | 661.2   |      1695.5        | -0.058980  | 138.9954​ |
-| 2    |    2297.5  | 406.6   |      1890.9        | -0.052885  | 121.5045 |
+| 1    |    2297.5  | 406.6   |      1890.9        | -0.052885  | 121.5045 |
+| 2    |    2356.6  | 661.2   |      1695.5        | -0.058980  | 138.9954​ |
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 
 ## Reproducibilidad del punto de agua 
 | Zona | Repetición 1 (mV) | Repetición 2 (mV) | Diferencia | Cabe en la tolerancia |
 |------|-------------------|-------------------|------------|------------------------|
-| 1    | 600               |  725              | 125        | no                     |
-| 2    | 632               |  648              | 16         | si                     |
+| 1    | 632               |  648              | 16         | si                     |
+| 2    | 600               |  725              | 125        | no                     |
 
 ## Verificación en el tercer punto (tierra húmeda)
 | Zona | mV  | Porcentaje (%) | Valor SIN recortar | Estable y repetible |
 |------|-----|------------|--------------------|---------------------|
-| 1    | 719 | 96.6         | N/A             | si           |
-| 2    | 782  | 89.2        | N/A             | si           |
+| 1    | 782  | 89.2        | N/A             | si           |
+| 2    | 719 | 96.6         | N/A             | si           |
 
 ## Dispersión medida 
 | Zona | Condición registrada | Media (%) | Dispersión (%) | Banda minima (k x disp) |
 |------|----------------------|-----------|----------------|-------------------------|
-| 1    | tierra     | 87.44      | 0.28             | 0.84                      |
-| 2    | tierra     | 83.2        | 0.20             | 0.60                      |
-
+| 1    | tierra     | 83.2        | 0.20             | 0.60                      |
+| 2    | tierra     | 87.44      | 0.28             | 0.84                      |
 k declarado: 3
 
 ## Contraste con la GT1
