@@ -37,7 +37,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 relativo basado en la resistencia eléctrica del sustrato.
 ## Electrolisis
 - Se uso ESP32 como si fuera un interruptor de luz. En lugar de conectar el
-sensor directo a la corriente fija, lo conectamos a un pin digital del ESP32.Para que asi el
+sensor directo a la corriente fija, lo conectamos a un pin digital del ESP32. Para que así el
 sensor este apagado el 99% del tiempo y sufra electrolisis.
 
 ## Verificación sensor simulado
