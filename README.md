@@ -32,6 +32,14 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 ## Ventana del filtro
 - N: 5, Se seleccionó porque para el sistema de riego se mide la humedad del suelo cada 60 segundos. La ventana de cinco muestras permite suavizar variaciones y ruido del sensor considerando aproximadamente cinco minutos de mediciones, sin generar un retraso excesivo para la decisión del riego.
 
+## Sensores
+- El valor de 0% a 100% que mostramos no es el porcentaje de volumen de agua real. Es un índice
+relativo basado en la resistencia eléctrica del sustrato.
+## Electrolisis
+- Se uso ESP32 como si fuera un interruptor de luz. En lugar de conectar el
+sensor directo a la corriente fija, lo conectamos a un pin digital del ESP32.Para que asi el
+sensor este apagado el 99% del tiempo y sufra electrolisis.
+
 ## Verificación sensor simulado
 | Parámetro        | Simulación (GT1) | 
 |------------------|------------------|
@@ -51,7 +59,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 |             Condición              |               Valor declarado              |
 |------------------------------------|--------------------------------------------|
 | Tensión de alimentación MEDIDA     |   3,2V (verificado con multímetro)         |
-| Canales empleados                  |          Z1: GPIO 32, Z2: GPIO 33          |
+| Canales empleados                  |          Z1: GPIO 35, Z2: GPIO 34          |
 | Atenuación del convertidor         | 11 dB, lectura en mV calibrados de fabrica |
 | Divisor a la entrada               | NO se emplea (Porque el sensor se alimenta de 3,3V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuración) |
 | Lectura en aire dentro de la zona útil | si |
@@ -93,7 +101,8 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 |------|----------------------|-----------|----------------|-------------------------|
 | 1    | tierra     | 83.2        | 0.20             | 0.60                      |
 | 2    | tierra     | 87.44      | 0.28             | 0.84                      |
-k declarado: 3
+
+- k declarado: 3
 
 ## Contraste con la GT1
 | Aspecto              | Simulacion (GT1) | Fisico (S4) |
