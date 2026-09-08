@@ -83,10 +83,10 @@ const uint8_t N_FILTRO = 5; // Se establece una media móvil de 5 mediciones par
 // Indica que, después de encender la alimentación del sensor, se esperan 300 ms antes de realizar la medición, permitiendo que la señal se estabilice.
 const uint32_t TIEMPO_ESTABILIZACION_SENSOR_MS = 300;
 // Constantes de calibración:
-const float M1 = -0.052885f; // Sensor zona 1: % = M1*mV + B1
-const float B_1 = 121.5045f;
-const float M2 = -0.058980f; // Sensor zona 2: % = M2*mV + B2
-const float B2 = 138.9954f;
+const float M1 = -0.057379f; // Sensor zona 1: % = M1*mV + B1
+const float B_1 = 116.1756f;
+const float M2 = -0.067404f; // Sensor zona 2: % = M2*mV + B2
+const float B2 = 136.3588f;
 // ==========================================================================
 // 6. UMBRALES DE CADA FSM
 // ==========================================================================
