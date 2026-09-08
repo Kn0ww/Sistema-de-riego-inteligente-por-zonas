@@ -79,8 +79,8 @@ sensor este apagado el 99% del tiempo y sufra electrolisis.
 ## Calibración de dos puntos
 | Zona | mV en aire | mV en agua | Separación (mV) | m (%/mV) | b (%) |
 |------|------------|------------|-----------------|----------|-------|
-| 1    |    2297.5  | 406.6   |      1890.9        | -0.052885  | 121.5045 |
-| 2    |    2356.6  | 661.2   |      1695.5        | -0.058980  | 138.9954​ |
+| 1    |    2024.7  | 281.9   |      1890.9        | -0.057379  | 116.1756 |
+| 2    |    2023.0  | 539.4   |      1695.5        | -0.067404  | 136.3588 |
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 
@@ -88,7 +88,7 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 | Zona | Repetición 1 (mV) | Repetición 2 (mV) | Diferencia | Cabe en la tolerancia |
 |------|-------------------|-------------------|------------|------------------------|
 | 1    | 632               |  648              | 16         | si                     |
-| 2    | 600               |  725              | 125        | no                     |
+| 2    | 563.6             | 623.3             | 140.3      | no                     |
 
 ## Verificación en el tercer punto (tierra húmeda)
 | Zona | mV  | Porcentaje (%) | Valor SIN recortar | Estable y repetible |
