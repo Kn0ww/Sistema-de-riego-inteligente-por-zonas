@@ -122,8 +122,16 @@ Esto obliga a darle a la Zona 1 una banda de histéresis mayor, ya que presenta 
 - La lectura se toma en milivolts calibrados de fabrica. El convertidor del
   ESP32 responde de forma util entre unos 150 y 2450 mV: fuera de ese rango la
   medicion se comprime o se recorta.
-- El porcentaje informado es una posicion relativa entre aire y agua, no un
+  
+- El porcentaje informado es una posicion relativa entre aire y agua, no unM
   contenido volumetrico de agua medido contra patron.
 - La dispersion registrada corresponde a la condicion declarada. En otra
   condicion, la dispersion puede ser distinta.
 - P8 es un prototipo educativo.
+
+## Tópicos de 4 niveles
+| Raíz  | Código de equipo | Código de proyecto | Nombre nodo | SubTopicos |
+|--------------------------|-----------------------------------------------|
+| curso |         E03      |         P08        |    nodo1    |    ///     |                  
+| curso |         E03      |         P08        |    nodo1    |   estado   |  
+| curso |         E03      |         P08        |    nodo1    |    cmd     |  
