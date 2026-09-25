@@ -131,7 +131,7 @@ Esto obliga a darle a la Zona 1 una banda de histéresis mayor, ya que presenta 
 
 ## Tópicos de 4 niveles
 | Raíz  | Código de equipo | Código de proyecto | Nombre nodo | SubTopicos |
-|--------------------------|-----------------------------------------------|
+|-------|------------------|--------------------|-------------|------------|
 | curso |         E03      |         P08        |    nodo1    |    ///     |                  
 | curso |         E03      |         P08        |    nodo1    |   estado   |  
 | curso |         E03      |         P08        |    nodo1    |    cmd     |  
