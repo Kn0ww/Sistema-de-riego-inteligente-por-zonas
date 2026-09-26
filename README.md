@@ -129,9 +129,10 @@ Esto obliga a darle a la Zona 1 una banda de histéresis mayor, ya que presenta 
   condicion, la dispersion puede ser distinta.
 - P8 es un prototipo educativo.
 
-## Tópicos de 4 niveles
-| Raíz  | Código de equipo | Código de proyecto | Nombre nodo | SubTopicos |
-|-------|------------------|--------------------|-------------|------------|
-| curso |         E03      |         P08        |    nodo1    |    ///     |                  
-| curso |         E03      |         P08        |    nodo1    |   estado   |  
-| curso |         E03      |         P08        |    nodo1    |    cmd     |  
+### Tabla de Tópicos MQTT
+
+| Nombre del Tópico | QoS | Retained | Descripción del Payload |
+| :--- | :---: | :---: | :--- |
+| `curso/E03/P08/nodo1` | 1 | True | Payload JSON plano con los datos de humedad calibrados y estados de las zonas Z1/Z2. |
+| `curso/E03/P08/nodo1/estado` | 1 | True | Mensaje de texto plano indicando el estado de conexión (ej. "online", "offline" por LWT). |
+| `curso/E03/P08/nodo1/cmd` | 1 | False | Reservado para la recepción de comandos de control entrantes (formato JSON). |
