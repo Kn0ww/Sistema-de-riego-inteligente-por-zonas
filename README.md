@@ -132,6 +132,6 @@ Esto obliga a darle a la Zona 1 una banda de histéresis mayor, ya que presenta 
 ## Tabla de Tópicos MQTT
 | Nombre del Tópico | QoS | Retained | Descripción del Payload |
 | :--- | :---: | :---: | :--- |
-| `curso/E03/P08/nodo1` | ?? | True | Payload JSON plano con los datos de humedad calibrados y estados de las zonas Z1/Z2. |
+| `curso/E03/P08/nodo1` | 0 | True | Payload JSON plano con los datos de humedad calibrados y estados de las zonas Z1/Z2. |
 | `curso/E03/P08/nodo1/estado` | 1 | True | Mensaje de texto plano indicando el estado de conexión. (Online, OfFline) |
 | `curso/E03/P08/nodo1/cmd` | 1 | False | Reservado para la recepción de comandos de control entrantes (formato JSON). |
