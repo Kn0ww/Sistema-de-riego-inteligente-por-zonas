@@ -129,7 +129,7 @@ Esto obliga a darle a la Zona 1 una banda de histéresis mayor, ya que presenta 
   condicion, la dispersion puede ser distinta.
 - P8 es un prototipo educativo.
 
-### Tabla de Tópicos MQTT
+## Tabla de Tópicos MQTT
 | Nombre del Tópico | QoS | Retained | Descripción del Payload |
 | :--- | :---: | :---: | :--- |
 | `curso/E03/P08/nodo1` | ?? | True | Payload JSON plano con los datos de humedad calibrados y estados de las zonas Z1/Z2. |
