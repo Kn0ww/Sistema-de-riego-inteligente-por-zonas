@@ -55,7 +55,7 @@ const uint8_t PIN_BUZZER          = 25;  // Genera la señal sonora.
 const uint8_t PIN_BOTON           = 13;  // Botón de control y rearme.
 const uint8_t PIN_SDA             = 21; // Comunicación I2C con el OLED.
 const uint8_t PIN_SCL             = 22; // Comunicación I2C con el OLED.
-
+// Parametros para conexión WI-FI
 const uint32_t PERIODO_PUB_MS     = 10000;
 const uint32_t ESPERA_INICIAL     = 2000;   // backoff MQTT: 2, 4, 8, 16, 30 s
 const uint32_t ESPERA_MAXIMA      = 30000;
@@ -698,11 +698,9 @@ void ejecutarFSM_Z2() {
       break;
   }
 }
-
-
-
-
-/* ---------------- 2. ESTADO INTERNO ---------------- */
+// ==========================================================================
+// 34. ESTADO INTERNO WIFI
+// ==========================================================================
 WiFiClient   red;
 PubSubClient mqtt(red);
 
@@ -721,7 +719,6 @@ void recibirComando(char* topic, byte* payload, unsigned int largo) {
   }
   Serial.printf("[cmd] recibido en %s\n", topic);
 }
-
 // 3.3 WiFi sin bloquear y sin cortar una asociacion en curso
 void mantenerWiFi() {
   if (WiFi.status() == WL_CONNECTED) return;
@@ -731,7 +728,6 @@ void mantenerWiFi() {
   Serial.println("[wifi] sin red, reintentando...");
   WiFi.reconnect();
 }
-
 // 3.4 MQTT sin bloquear el lazo, con testamento y espera creciente
 void mantenerMQTT() {
   if (mqtt.connected()) return;
@@ -754,7 +750,6 @@ void mantenerMQTT() {
     esperaReconexion = (esperaReconexion * 2 > ESPERA_MAXIMA) ? ESPERA_MAXIMA : esperaReconexion * 2;
   }
 }
-
 // 3.5 Publicacion: JSON plano, solo numeros, datos NO retenidos (QoS 0)
 void publicarDatos() {
   if (!mqtt.connected()) return;
@@ -784,12 +779,8 @@ void publicarDatos() {
     Serial.println("[pub] ERROR publish() (buffer o sesion)");
   }
 }
-
-
-
-
 // ==========================================================================
-// 34. LÓGICA GENERAL DE LAS DOS FSM
+// 35. LÓGICA GENERAL DE LAS DOS FSM
 // ==========================================================================
 void ejecutarFSM() {
   if (botonPresionado()) { // BOTÓN
@@ -816,7 +807,7 @@ void ejecutarFSM() {
   ejecutarFSM_Z2(); // Cada zona ejecuta SU propia FSM.
 }
 // ==========================================================================
-// 35. SETUP
+// 36. SETUP
 // ==========================================================================
 void setup() {
   Serial.begin(115200);
@@ -931,7 +922,7 @@ void setup() {
   mqtt.setSocketTimeout(3);
 }
 // ==========================================================================
-// 36. LOOP PRINCIPAL
+// 37. LOOP PRINCIPAL
 // ==========================================================================
 void loop() {
   uint32_t ahora = millis();
