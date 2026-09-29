@@ -773,7 +773,7 @@ void publicarDatos() {
   size_t n = serializeJson(doc, payload, sizeof(payload));
 
   // publish(topico, datos, largo, RETAINED). No hay parametro de QoS: siempre QoS 0.
-  if (mqtt.publish(topicDatos.c_str(), (const uint8_t*)payload, n, false)) {
+  if (mqtt.publish(topicDatos.c_str(), (const uint8_t*)payload, n, true)) {
     Serial.printf("[pub] %s -> %s\n", topicDatos.c_str(), payload);
   } else {
     Serial.println("[pub] ERROR publish() (buffer o sesion)");
