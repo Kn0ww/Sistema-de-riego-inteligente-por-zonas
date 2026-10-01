@@ -77,14 +77,14 @@ sensor este apagado el 99% del tiempo y sufra electrolisis.
 | Reproducibilidad del punto de agua entre repeticiones |       +/- 60 mV      |
 
 ## Calibración de dos puntos
-| Zona | mV en aire | mV en agua | Separación (mV) | m (%/mV) | b (%) |
+| Zona | mV en tierra | mV en tierra humeda | Separación (mV) | m (%/mV) | b (%) |
 |------|------------|------------|-----------------|----------|-------|
-| 1    |    2024.7  | 281.9   |      1890.9        | -0.057379  | 116.1756 |
-| 2    |    2023.0  | 539.4   |      1695.5        | -0.067404  | 136.3588 |
+| 1    |    1060.1  | 420.4   |      639.7        | -0.156321  | 165.7188 |
+| 2    |    1138.9  | 462.4 |      676.5        | -0.147820  | 168.3548 |
 
 La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 
-## Reproducibilidad del punto de agua 
+## Reproducibilidad del punto de tierra humeda 
 | Zona | Repetición 1 (mV) | Repetición 2 (mV) | Diferencia | Cabe en la tolerancia |
 |------|-------------------|-------------------|------------|------------------------|
 | 1    | 323               |  270              | 53     | no                     |
