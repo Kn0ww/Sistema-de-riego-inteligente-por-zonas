@@ -64,7 +64,7 @@ sensor este apagado el 99% del tiempo y sufra electrolisis.
 | Divisor a la entrada               | NO se emplea (Porque el sensor se alimenta de 3,3V, por lo que la salida se mantiene dentro del rango considerado utilizable por el ADC en esta configuración) |
 | Lectura en aire dentro de la zona útil | si |
 | Tiempo de estabilización en cada punto |        10 s         |
-| Sustrato de cada zona                  | Z1: Agua  Z2: Agua |
+| Sustrato de cada zona                  | Z1: tierra  Z2: tierra |
 | Profundidad de inserción               |     hasta 8cm      |
 | Temperatura ambiente                   |        20°C        |
 | N de la media móvil                    |          5         |
