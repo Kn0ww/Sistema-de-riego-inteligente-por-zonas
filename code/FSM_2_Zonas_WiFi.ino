@@ -759,13 +759,13 @@ void publicarDatos() {
   if (humedadValidaZ1) {
     doc["humedad_z1"] = roundf(humedadZ1 * 10.0f) / 10.0f; // resolucion del: 0,1
   }
-  doc["estado_z1"] = nombreEstado(estadoZ1);
+  doc["estado_z1"] = (int)estadoZ1;
 
   // Zona 2: mismo criterio
   if (humedadValidaZ2) {
     doc["humedad_z2"] = roundf(humedadZ2 * 10.0f) / 10.0f;
   }
-  doc["estado_z2"] = nombreEstado(estadoZ2);
+  doc["estado_z2"] = (int)estadoZ2;
 
   doc["rssi_dbm"]  = WiFi.RSSI();
 
