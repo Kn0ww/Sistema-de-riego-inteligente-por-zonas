@@ -17,7 +17,7 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - 2 sensores de humedad HD-38
 - Relé de 4 canales HW-316
 - Mini bomba de agua R385 DC 5V
-- Pantalla LCD Oled 1.3 128x64 caracteres blancos
+- Pantalla Oled 1.3 128x64 caracteres blancos
 - Servomotor SG90
   
 ## Software
@@ -36,9 +36,9 @@ Diseñar e implementar un sistema de riego automático basado en IoT, capaz de m
 - El valor de 0% a 100% que mostramos no es el porcentaje de volumen de agua real. Es un índice
 relativo basado en la resistencia eléctrica del sustrato.
 ## Electrolisis
-- Se uso ESP32 como si fuera un interruptor de luz. En lugar de conectar el
-sensor directo a la corriente fija, lo conectamos a un pin digital del ESP32. Para que así el
-sensor este apagado el 99% del tiempo y sufra electrolisis.
+Para evitar la electrólisis, los sensores no quedan energizados permanentemente:
+- Se alimentan directo desde un pin GPIO del ESP32 solo durante la medición, con 300 ms de estabilización previa, permaneciendo apagados el 99% del tiempo.
+- Justificación de corriente: El sensor HD-38 consume ~10 mA al medir, valor muy inferior al límite seguro de 20-40 mA que entrega un pin GPIO del ESP32, operando con amplia holgura y haciendo innecesario un transistor externo.
 
 ## Verificación sensor simulado
 | Parámetro        | Simulación (GT1) | 
@@ -77,7 +77,7 @@ sensor este apagado el 99% del tiempo y sufra electrolisis.
 | Reproducibilidad del punto de agua entre repeticiones |       +/- 60 mV      |
 
 ## Calibración de dos puntos
-| Zona | mV en tierra | mV en tierra humeda | Separación (mV) | m (%/mV) | b (%) |
+| Zona | mV en tierra seca | mV en tierra humeda | Separación (mV) | m (%/mV) | b (%) |
 |------|------------|------------|-----------------|----------|-------|
 | 1    |    1060.1  | 420.4   |      639.7        | -0.156321  | 165.7188 |
 | 2    |    1138.9  | 462.4 |      676.5        | -0.147820  | 168.3548 |
@@ -87,20 +87,20 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 ## Reproducibilidad del punto de tierra humeda 
 | Zona | Repetición 1 (mV) | Repetición 2 (mV) | Diferencia | Cabe en la tolerancia |
 |------|-------------------|-------------------|------------|------------------------|
-| 1    | 323               |  270              | 53     | no                     |
+| 1    | 323               |  270              | 53     | si                     |
 | 2    | 506               |  502              | 4      | si                     |
 
 ## Verificación en el tercer punto (tierra húmeda)
 | Zona | mV  | Porcentaje (%) | Valor SIN recortar | Estable y repetible |
 |------|-----|------------|--------------------|---------------------|
-| 1    | 782  | 89.2        | N/A             | si           |
-| 2    | 719 | 96.6         | N/A             | si           |
+| 1    | 782  | 71.3        | N/A             | si           |
+| 2    | 719 | 62.1         | N/A             | si           |
 
 ## Dispersión medida 
 | Zona | Condición registrada | Media (%) | Dispersión (%) | Banda minima (k x disp) |
 |------|----------------------|-----------|----------------|-------------------------|
-| 1    | tierra humeda    | 83.2        | 0.20             | 0.60                      |
-| 2    | tierra humeda    | 87.44      | 0.28             | 0.84                      |
+| 1    | tierra humeda    | 71.3       | 0.28             | 0.84                      |
+| 2    | tierra humeda    | 62.1      | 0.20             | 0.60                     |
 
 - k declarado: 3
 
@@ -112,9 +112,22 @@ La pendiente m es NEGATIVA en ambas zonas: a mayor humedad, menor lectura.
 | Desviacion observada | ---              | <diferencia entre los tres pares> |
 
 ## Hallazgo del equipo
-La diferencia entre las medias es de 4,24 puntos porcentuales, mientras que la dispersión de la Zona 1 es 0,08 puntos porcentuales mayor que la de la Zona 2. Por lo tanto, la Zona 1 resultó ser la más dispersa.
+A partir de los ensayos realizados en condición de tierra húmeda, se registraron las siguientes métricas de dispersión y respuesta:
 
-Esto obliga a darle a la Zona 1 una banda de histéresis mayor, ya que presenta más variación en sus lecturas. Una banda demasiado pequeña podría hacer que el sistema cambie repetidamente entre regar y no regar debido al ruido del sensor, provocando una oscilación de la bomba. La Zona 2, al ser menos dispersa, puede utilizar una banda menor.
+- Diferencia de medias: Se observó una separación de 9,2 puntos porcentuales entre la Zona 1 (71,3 %) y la Zona 2 (62,1 %).
+- Dispersión observada: La Zona 2 presentó una dispersión de 0,28 %, mientras que la Zona 1 registró 0,20 %.
+- Banda mínima teórica (k = 3):
+  * Zona 1: 3 * 0,20 % = 0,60 %
+  * Zona 2: 3 * 0,28 % = 0,84 %
+
+Inicialmente se consideró necesario establecer una banda de histéresis diferenciada por zona debido a la discrepancia de dispersión entre ambos ejemplares. No obstante, en el firmware se implementó una banda de histéresis común de 10 puntos porcentuales (10 %) para ambas zonas.
+
+Justificación técnica de la banda común en firmware:
+Al contrastar la banda de 10 % del firmware frente al requerimiento teórico de cada sensor:
+- En la Zona 1: 10 % / 0,60 % = 16,67 veces (~17 veces el mínimo requerido).
+- En la Zona 2: 10 % / 0,84 % = 11,90 veces (~12 veces el mínimo requerido).
+
+La banda configurada supera entre 12 y 17 veces el mínimo exigido por la dispersión experimental. Dado este amplio margen de holgura, cualquier fluctuación espuria o ruido de medición queda plenamente absorbido, evitando oscilaciones en la conmutación del actuador y la bomba sin necesidad de complejizar el firmware con umbrales independientes.
 
 ### Limitaciones registradas
 - La escala construida vale para el ejemplar, el sustrato Y la profundidad de
