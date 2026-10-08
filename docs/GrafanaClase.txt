@@ -1,0 +1,52 @@
+// ultima muestra recibida 
+from(bucket: "mediciones")
+  |> range(start: -5m	)
+  |> filter(fn: (r) => r._measurement == " mediciones " )
+  |> filter(fn: (r) => r.equipo == "E03")
+  |> filter(fn: (r) => r.proyecto == "P08")
+  |> filter(fn: (r) => r.nodo == "nodo1")
+  |> filter(fn: (r) => r._field == "humedad_z1" or r._field == "humedad_z2")
+  |> last()	
+// promedio 5 minutos 
+from(bucket: "mediciones")
+  |> range(start: -5m)
+  |> filter(fn: (r) => r._measurement == " mediciones " )
+  |> filter(fn: (r) => r.equipo == "E03")
+  |> filter(fn: (r) => r.proyecto == "P08")
+  |> filter(fn: (r) => r.nodo == "nodo1")
+  |> filter(fn: (r) => r._field == "humedad_z1" or r._field == "humedad_z2")
+  |> mean()	
+// Humedad maxima ultimas 24 horas las 2 zonas 
+from(bucket: "mediciones")
+  |> range(start: -24h)
+  |> filter(fn: (r) => r._measurement == " mediciones " )
+  |> filter(fn: (r) => r.equipo == "E03")
+  |> filter(fn: (r) => r.proyecto == "P08")
+  |> filter(fn: (r) => r.nodo == "nodo1")
+  |> filter(fn: (r) => r._field == "humedad_z1" or r._field == "humedad_z2")
+  |> max()	
+// Humedad maxima ultimas 24 horas zona 1
+from(bucket: "mediciones")
+  |> range(start: -24h)
+  |> filter(fn: (r) => r._measurement == "mediciones")
+  |> filter(fn: (r) => r.equipo == "E03")
+  |> filter(fn: (r) => r.proyecto == "P08")
+  |> filter(fn: (r) => r.nodo == "nodo1")
+  |> filter(fn: (r) => r._field == "humedad_z1")
+  |> max()
+// Humedad maxima ultimas 24 horas zona 2
+from(bucket: "mediciones")
+  |> range(start: -24h)
+  |> filter(fn: (r) => r._measurement == "mediciones")
+  |> filter(fn: (r) => r.equipo == "E03")
+  |> filter(fn: (r) => r.proyecto == "P08")
+  |> filter(fn: (r) => r.nodo == "nodo1")
+  |> filter(fn: (r) => r._field == "humedad_z2")
+  |> max()
+ESP32 -> MQTT -> Mosquitto -> telegraf -> InlfluxDB -> Grafana
+Bucket: mediciones
+Measurement: mediciones
+equipo = E03
+proyecto = P08
+nodo = nodo1
+Fields:humedad_z1 - humedad_z2 - estado_z1 - estado_z2
