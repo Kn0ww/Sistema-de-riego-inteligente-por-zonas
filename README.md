@@ -148,3 +148,37 @@ La banda configurada supera entre 12 y 17 veces el mínimo exigido por la disper
 | `curso/E03/P08/nodo1` | 0 | True | Payload JSON plano con los datos de humedad calibrados y estados de las zonas Z1/Z2. |
 | `curso/E03/P08/nodo1/estado` | 1 | True | Mensaje de texto plano indicando el estado de conexión. (Online, OfFline) |
 | `curso/E03/P08/nodo1/cmd` | 1 | False | Reservado para la recepción de comandos de control entrantes (formato JSON). |
+
+## Informacion Telegraf
+
+```text
+ESP32 -> MQTT -> Mosquitto -> Telegraf -> InfluxDB -> Grafana
+```
+
+1. El ESP32 obtiene las mediciones de los sensores.
+2. Las mediciones se publican mediante MQTT.
+3. Mosquitto recibe los mensajes MQTT.
+4. Telegraf consume los tópicos MQTT y procesa los datos.
+5. Telegraf almacena los datos en InfluxDB.
+6. Grafana consulta InfluxDB para visualizar las métricas.
+
+```text
+Bucket: mediciones
+Measurement: mediciones
+```
+
+| Tag | Valor |
+| :--- | :--- |
+| `equipo` | `E03` |
+| `proyecto` | `P08` |
+| `nodo` | `nodo1` |
+
+## Fields del Proyecto
+
+| Field | Descripción |
+| :--- | :--- |
+| `humedad_z1` | Humedad medida en la zona 1. |
+| `humedad_z2` | Humedad medida en la zona 2. |
+| `estado_z1` | Estado actual de la zona 1. |
+| `estado_z2` | Estado actual de la zona 2. |
+| `rssi_dbm` | Intensidad de la señal WiFi recibida por el ESP32 en dBm. |
