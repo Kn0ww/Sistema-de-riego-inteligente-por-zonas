@@ -1,7 +1,6 @@
 /* =========================================================================
    PROYECTO: Sistema de Riego Automatizado con ESP32 - 2 ZONAS
    ARQUITECTURA:
-   - FSM independiente para ZONA 1
    - FSM independiente para ZONA 2
    - Una bomba común
    - Un servo distribuidor para seleccionar la zona
