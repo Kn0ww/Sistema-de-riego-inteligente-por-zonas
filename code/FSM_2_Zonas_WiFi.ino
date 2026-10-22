@@ -1,6 +1,7 @@
 /* =========================================================================
    PROYECTO: Sistema de Riego Automatizado con ESP32 - 2 ZONAS
    ARQUITECTURA:
+   - FSM independiente para ZONA 1
    - FSM independiente para ZONA 2
    - Una bomba común
    - Un servo distribuidor para seleccionar la zona
@@ -33,10 +34,10 @@
    ========================================================================= */
 #include <Wire.h>
 #include <WiFi.h>
+#include <Adafruit_SH110X.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 #include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
 #include <ESP32Servo.h>
 #include "config.h"
 // ==========================================================================
@@ -70,9 +71,9 @@ const uint8_t RELE_OFF = HIGH;   // HIGH = relé desactivado → bomba apagada.
 // 3. SERVO
 // ==========================================================================
 // Define las posiciones que utilizará el servo para dirigir el agua hacia cada zona de riego.
-const int SERVO_Z1     = 40; // 40° → dirige el agua hacia la zona 1.
-const int SERVO_Z2     = 140; // 140° → dirige el agua hacia la zona 2.
-const int SERVO_NEUTRO = 90; // 90° → posición neutra, sin seleccionar una zona.
+const int SERVO_Z1     = 80; // 40° → dirige el agua hacia la zona 1.
+const int SERVO_Z2     = 20; // 140° → dirige el agua hacia la zona 2.
+const int SERVO_NEUTRO = 40; // 90° → posición neutra, sin seleccionar una zona.
 Servo servoDistribucion; // Crea el objeto encargado de controlar el servo.
 int ultimaZonaServo = 0; // Variable que guarda cuál fue la última zona seleccionada para evitar mover innecesariamente el servo.
 // 0 = neutro, 1 = zona 1, 2 = zona 2
@@ -84,7 +85,7 @@ int ultimaZonaServo = 0; // Variable que guarda cuál fue la última zona selecc
 #define OLED_RESET -1 // Aca el -1 significa que la pantalla no utiliza un pin de reset independiente.
 #define OLED_ADDR 0x3C // 0x3C: dirección I2C del OLED.
 // Se crea el objeto que permite controlar la pantalla mediante la biblioteca Adafruit_SSD1306.
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); 
+Adafruit_SH1106G display = Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 // ==========================================================================
 // 5. ADQUISICIÓN Y FILTRADO
 // ==========================================================================
@@ -449,7 +450,7 @@ void actualizarOLED() {
   t_oled = ahora;
   display.clearDisplay();
   display.setTextSize(1);
-  display.setTextColor(SSD1306_WHITE);
+  display.setTextColor(SH110X_WHITE);
   display.setCursor(0, 0);
   display.print("Z1: ");   // HUMEDAD Z1
   display.print(humedadZ1, 1);
@@ -835,17 +836,15 @@ void setup() {
   servoDistribucion.write(SERVO_NEUTRO); // SERVO
   ultimaZonaServo = 0;
 
-  Wire.begin(PIN_SDA,PIN_SCL);   // OLED
+  Wire.begin(PIN_SDA, PIN_SCL);
+  delay(100);
 
-  if (!display.begin(
-        SSD1306_SWITCHCAPVCC,OLED_ADDR
-      )) {
-    Serial.println("ERROR: no se pudo iniciar el OLED SSD1306.");
-  }
-  else {
+  if (!display.begin(OLED_ADDR, true)) { 
+    Serial.println("ERROR: no se pudo iniciar el OLED SH1106.");
+  } else {
     display.clearDisplay();
     display.setTextSize(1);
-    display.setTextColor(SSD1306_WHITE);
+    display.setTextColor(SH110X_WHITE);
     display.setCursor(0, 0);
     display.println("Sistema riego");
     display.println("2 zonas");
