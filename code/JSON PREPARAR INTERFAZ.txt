@@ -1,0 +1,58 @@
+var raw = msg.payload;
+
+// 1. Sanitizar y desanidar si llega como string
+if (typeof raw === "string") {
+    try {
+        raw = raw.trim();
+        if (raw.startsWith('"') && raw.endsWith('"')) {
+            raw = raw.substring(1, raw.length - 1).trim();
+            raw = raw.replace(/\\"/g, '"');
+        }
+        raw = JSON.parse(raw);
+    } catch (e) {
+        node.error("Fallo al parsear JSON: " + e.message);
+        return null;
+    }
+}
+
+var d = raw || {};
+
+// 2. Extraer valores numéricos de humedad para AMBAS zonas
+var val1 = 0;
+var val2 = 0;
+
+if (d.humedad_z1 !== undefined && d.humedad_z1 !== null) {
+    val1 = Number(d.humedad_z1);
+}
+if (d.humedad_z2 !== undefined && d.humedad_z2 !== null) {
+    val2 = Number(d.humedad_z2);
+}
+
+// Función auxiliar para mapear los estados sin repetir código
+function obtenerEstado(estadoNum) {
+    var st = Number(estadoNum);
+    switch (st) {
+        case 0: return "VIGILANDO";
+        case 1: return "REGANDO";
+        case 2: return "ALERTA";
+        case 3: return "ERROR SEGURO";
+        default: return (!isNaN(st)) ? ("ESTADO " + st) : "SIN ESTADO";
+    }
+}
+
+// 3. Mapear estado numérico de la FSM para AMBAS zonas
+var stTxt1 = (d.estado_z1 !== undefined) ? obtenerEstado(d.estado_z1) : "DESCONOCIDO";
+var stTxt2 = (d.estado_z2 !== undefined) ? obtenerEstado(d.estado_z2) : "DESCONOCIDO";
+
+// 4. Preparar las salidas
+// Zona 1
+var mGauge1 = { payload: val1 };
+var mChart1 = { payload: val1, topic: "Humedad Z1" };
+var mText1 = { payload: stTxt1 };
+
+// Zona 2
+var mGauge2 = { payload: val2 };
+var mText2 = { payload: stTxt2 };
+var mChart2 = { payload: val2, topic: "Humedad Z2" };
+
+return [mGauge1, mChart1, mText1, mGauge2, mText2, mChart2];
